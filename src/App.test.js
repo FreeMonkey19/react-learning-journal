@@ -15,10 +15,4 @@ it("renders a message", () => {
   expect(message).toBeInTheDocument();
   expect(message).toHaveClass("message");
   expect(message).toBeVisible();
-
-  // expe
 });
-
-// const { getByText } = render(<App />);
-// const renderObject = render(<App />)
-// renderObject.getByText()
