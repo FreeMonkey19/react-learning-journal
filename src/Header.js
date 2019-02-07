@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { MainNav } from "./MainNav.js";
+import "./MainHeader.css";
 
 export class Header extends Component {
   render() {
