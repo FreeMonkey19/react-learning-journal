@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { App } from "./App";
+import { Post } from "./Post";
 import { render } from "react-testing-library";
 
 it("renders without crashing", () => {
@@ -17,15 +18,6 @@ it("renders entire header", () => {
   expect(title).toBeVisible();
 });
 
-// it("renders a post", () => {
-//   const post = {
-//     title: 'My Post My Post My PostMy Post My PostMy PostMy PostMy PostMy Post'
-//   }
-//   const otherPost = {}
-//   const allPosts = [post, otherPost]
-//   const { getByText } = render(<Post post={post} />)
-//   expect(getByText(post.title)).toBeInTheDocumen`t()
-// })
 it("renders main title and subtitle", () => {
   const { getByText } = render(<App />);
   const subtitle = getByText(
@@ -47,4 +39,13 @@ it("renders main nav and nav links", () => {
   expect(getNavLinks).toBeInTheDocument();
   expect(getNavLinks).toHaveClass("nav-link");
   expect(getNavLinks).toBeVisible();
+});
+
+it("renders a post", () => {
+  const post = {
+    title: "My Post"
+  };
+  const { getByText } = render(<Post post={post} />);
+  expect(getByText(post.title)).toBeInTheDocument();
+  expect(getByText(post.title)).toHaveClass("post");
 });
