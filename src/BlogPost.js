@@ -31,12 +31,14 @@ export class BlogPost extends Component {
         </div>
 
         <span className="date-created">{renderDate(post.createdOn)}</span>
+
         <div className="post-body">{post.body}</div>
+
         <div className="tags-container">
-          <span className="tag-container">
-            Key Words:
-            <a href="#" className="post-tag">{`${post.tags}`}</a>
-          </span>
+          <span className="tag-container">Key Words:</span>
+          {post.tags.map(function(tag) {
+            return <a href="#" className="post-tag" key={tag}>{`${tag}`}</a>;
+          })}
         </div>
       </div>
     );
