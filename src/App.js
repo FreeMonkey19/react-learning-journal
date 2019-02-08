@@ -3,6 +3,7 @@ import { Header } from "./Header.js";
 import "./App.css";
 // import { AllPosts } from "./AllPosts";
 import { BlogPost } from "./BlogPost";
+// import { AllPosts } from "./AllPosts.js";
 
 const post = {
   id: 0,
@@ -24,7 +25,6 @@ export class App extends Component {
     return (
       <div className="App">
         <Header />
-
         <BlogPost post={post} />
       </div>
     );

@@ -47,19 +47,28 @@ it("renders a post", () => {
     title: "Mary had a little lamb, little lamb, little lamb.",
     author: "Charlotte Mickey Mouse",
     createdOn: "2019-01-02",
-    body: `No worries.`,
+    body: "No worries.",
     tags: ["trees", "rocks"]
   };
+
+  const authorRegex = new RegExp(post.author);
 
   const { getByText } = render(<BlogPost post={post} />);
   expect(getByText(post.title)).toBeInTheDocument();
   expect(getByText(post.title)).toHaveClass("post-title");
-  expect(getByText(post.author)).toBeInTheDocument();
-  expect(getByText(post.author)).toHaveClass("post-author");
-  expect(getByText(post.createdOn)).toBeInTheDocument();
-  expect(getByText(post.createdOn)).toHaveClass("date-created");
+
+  expect(getByText(authorRegex)).toBeInTheDocument();
+  expect(getByText(authorRegex)).toHaveClass("post-author");
+
+  const newDate = new RegExp("Publish Date:");
+
+  expect(getByText(newDate)).toBeInTheDocument();
+  expect(getByText(newDate)).toHaveClass("date-created");
+
   expect(getByText(post.body)).toBeInTheDocument();
   expect(getByText(post.body)).toHaveClass("post-body");
-  // expect(getByText(post.tags)).toBeInTheDocument();
-  // expect(getByText(post.tags)).toHaveClass("post-tags");
+
+  const tagsString = new RegExp("Key Words:");
+  expect(getByText(tagsString)).toBeInTheDocument();
+  expect(getByText(tagsString)).toHaveClass("tag-container");
 });
