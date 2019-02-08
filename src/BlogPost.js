@@ -18,6 +18,10 @@ export class BlogPost extends Component {
     return (
       <div className="post-container">
         <h2 className="post-title">{post.title}</h2>
+        <div className="post-author">{post.author}</div>
+        <span className="date-created">{post.createdOn}</span>
+        <div className="post-body">{post.body}</div>
+        <span className="post-tags">{post.tags}</span>
       </div>
     );
   }
