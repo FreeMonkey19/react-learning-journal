@@ -1,4 +1,4 @@
-var data = [
+export var data = [
   {
     id: 0,
     title: "Mary had a little lamb, little lamb, little lamb.",
