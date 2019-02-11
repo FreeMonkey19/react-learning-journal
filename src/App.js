@@ -26,7 +26,6 @@ export class App extends Component {
       <div className="App">
         <Header />
         <AllPosts allPosts={data} />
-        <BlogPost post={post} />
       </div>
     );
   }

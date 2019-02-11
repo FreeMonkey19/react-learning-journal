@@ -72,6 +72,9 @@ it("renders a post", () => {
   const tagsString = new RegExp("Key Words:");
   expect(getByText(tagsString)).toBeInTheDocument();
   expect(getByText(tagsString)).toHaveClass("tag-container");
+
+  expect(getByText(post.tags[0])).toBeInTheDocument();
+  expect(getByText(post.tags[1])).toBeInTheDocument();
 });
 
 it("renders all posts", () => {
@@ -128,6 +131,5 @@ it("renders all posts", () => {
 
   const { getByText } = render(<AllPosts allPosts={posts} />);
   expect(getByText(posts[0].title)).toBeInTheDocument();
-  // expect(getByText(posts[0].title).toHaveClass(0));
   expect(getByText(posts[1].title)).toBeInTheDocument();
 });
