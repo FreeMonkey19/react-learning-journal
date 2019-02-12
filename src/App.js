@@ -1,15 +1,27 @@
 import React, { Component } from "react";
 import { Header } from "./Header.js";
 import "./App.css";
+import { Route } from "react-router-dom";
+import { Home } from "./Home.js";
 import { AllPosts } from "./AllPosts";
-import { data } from "./data.js";
+import { About } from "./About.js";
+import { Contact } from "./Contact.js";
+import { BrowserRouter } from "react-router-dom";
 
 export class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
-        <AllPosts allPosts={data} />
+        <BrowserRouter>
+          <div>
+            <Header />
+
+            <Route exact path="/" component={Home} />
+            <Route path="/allPosts" component={AllPosts} />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+          </div>
+        </BrowserRouter>
       </div>
     );
   }
