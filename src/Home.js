@@ -1,11 +1,17 @@
 import React, { Component } from "react";
+import { data } from "./data.js";
+import { BlogPost } from "./BlogPost.js";
 
 export class Home extends Component {
+  state = { post: {} };
+
+  componentDidMount() {
+    this.setState({ post: data[0] });
+  }
   render() {
-    return (
-      <div>
-        <h2>This is the HOME page! </h2>
-      </div>
-    );
+    if (!this.state.post.title) {
+      return null;
+    }
+    return <BlogPost post={this.state.post} />;
   }
 }
