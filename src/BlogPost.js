@@ -1,19 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
-// props: {
-//   post: {
-//     id: number,
-//     title: string,
-//     author: string,
-//     createdOn: string,
-//     body: string,
-//     tags: arrayOf(string),
-//   }
-// }
+import { Link } from "react-router-dom";
 
 export class BlogPost extends Component {
   render() {
+    console.log(this.props.post);
     const { post } = this.props;
 
     function renderDate(date) {
@@ -24,7 +15,9 @@ export class BlogPost extends Component {
 
     return (
       <div className="post-container">
-        <h2 className="post-title">{post.title}</h2>
+        <h2 className="post-title">
+          <Link to={`/posts/${post.id}`}>{post.title}</Link>
+        </h2>
 
         <div className="author-container">
           Published By:
@@ -51,3 +44,16 @@ export class BlogPost extends Component {
     );
   }
 }
+
+const blogPostPropType = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  createdOn: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired
+});
+
+BlogPost.propTypes = {
+  post: blogPostPropType.isRequired
+};

@@ -1,19 +1,25 @@
 import React, { Component } from "react";
 import "./MainNav.css";
+import { NavLink } from "react-router-dom";
 
 export class MainNav extends Component {
   render() {
     return (
       <nav className="main-nav" title="main-nav-bar">
-        <a className="nav-link" title="main-nav-link'" href="#home-page">
-          Home
-        </a>
-        <a className="nav-link" title="main-nav-link" href="#about-page">
-          About
-        </a>
-        <a className="nav-link" title="main-nav-link" href="#contact-page">
-          Contact
-        </a>
+        <span className="nav-link" title="main-nav-link">
+          <NavLink to="/">Home</NavLink>
+        </span>
+        <span className="nav-link" title="main-nav-link">
+          <NavLink to="/posts">All Posts</NavLink>
+        </span>
+
+        <span className="nav-link" title="main-nav-link">
+          <NavLink to="/about">About</NavLink>
+        </span>
+
+        <span className="nav-link" title="main-nav-link">
+          <NavLink to="/contact">Contact</NavLink>
+        </span>
       </nav>
     );
   }
