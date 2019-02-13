@@ -1,16 +1,5 @@
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
-
-// props: {
-//   post: {
-//     id: number,
-//     title: string,
-//     author: string,
-//     createdOn: string,
-//     body: string,
-//     tags: arrayOf(string),
-//   }
-// }
+import PropTypes from "prop-types";
 
 export class BlogPost extends Component {
   render() {
@@ -51,3 +40,16 @@ export class BlogPost extends Component {
     );
   }
 }
+
+const blogPostPropType = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  createdOn: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired
+});
+
+BlogPost.propTypes = {
+  post: blogPostPropType.isRequired
+};
