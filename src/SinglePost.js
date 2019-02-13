@@ -1,15 +1,18 @@
 import React, { Component } from "react";
-import { data } from "./data.js";
 import { BlogPost } from "./BlogPost.js";
+import { data } from "./data";
 
-export class Home extends Component {
+export class SinglePost extends Component {
   state = { post: {} };
 
   componentDidMount() {
-    this.setState({ post: data[0] });
+    const id = parseInt(this.props.match.params.id);
+    const currentPost = data.find(function(post) {
+      return id === post.id;
+    });
+    this.setState({ post: currentPost });
   }
   render() {
-    console.log("render home", this.state.post.title);
     if (this.state.post.id == null) {
       return null;
     }

@@ -7,10 +7,10 @@ export class MainNav extends Component {
     return (
       <nav className="main-nav" title="main-nav-bar">
         <span className="nav-link" title="main-nav-link">
-          <NavLink to="/home">Home</NavLink>
+          <NavLink to="/">Home</NavLink>
         </span>
         <span className="nav-link" title="main-nav-link">
-          <NavLink to="/allPosts">All Posts</NavLink>
+          <NavLink to="/posts">All Posts</NavLink>
         </span>
 
         <span className="nav-link" title="main-nav-link">

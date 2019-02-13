@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export class BlogPost extends Component {
   render() {
+    console.log(this.props.post);
     const { post } = this.props;
 
     function renderDate(date) {
@@ -13,7 +15,9 @@ export class BlogPost extends Component {
 
     return (
       <div className="post-container">
-        <h2 className="post-title">{post.title}</h2>
+        <h2 className="post-title">
+          <Link to={`/posts/${post.id}`}>{post.title}</Link>
+        </h2>
 
         <div className="author-container">
           Published By:
