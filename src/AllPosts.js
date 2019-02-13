@@ -9,11 +9,21 @@ export class AllPosts extends Component {
     this.setState({ allPosts: data });
   }
 
+  onFilterByAuthor = authName => {
+    console.log(authName);
+  };
+
   render() {
     return (
       <div className="AllPosts">
-        {this.state.allPosts.map(function(post) {
-          return <BlogPost post={post} key={post.id} />;
+        {this.state.allPosts.map(post => {
+          return (
+            <BlogPost
+              onFilterByAuthor={this.onFilterByAuthor}
+              post={post}
+              key={post.id}
+            />
+          );
         })}
       </div>
     );
