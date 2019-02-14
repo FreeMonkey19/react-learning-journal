@@ -10,7 +10,6 @@ export class AllPosts extends Component {
   }
 
   onFilterByAuthor = authName => {
-    console.log(authName);
     const filteredPosts = this.state.posts.filter(post => {
       return authName === post.author;
     });
