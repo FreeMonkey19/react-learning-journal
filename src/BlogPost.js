@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 
 export class BlogPost extends Component {
   render() {
-    console.log(this.props.post);
     const { post, onFilterByAuthor } = this.props;
-
+    console.log(this.props);
     function renderDate(date) {
       const datePieces = date.split("-");
       const [year, month, day] = datePieces;
