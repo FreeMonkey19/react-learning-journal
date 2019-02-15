@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export class BlogPost extends Component {
   render() {
     const { post, onFilterByAuthor } = this.props;
-    console.log(this.props);
+
     function renderDate(date) {
       const datePieces = date.split("-");
       const [year, month, day] = datePieces;
@@ -33,13 +33,9 @@ export class BlogPost extends Component {
           <span className="tag-container">Key Words:</span>
           {post.tags.map(function(tag) {
             return (
-              <button
-                className="post-tag"
-                key={tag}
-                onClick={() => onFilterByTags(post.tag)}
-              >
-                {post.tag}
-              </button>
+              <a href="#" className="post-tag" key={tag}>
+                {tag}
+              </a>
             );
           })}
         </div>
@@ -59,6 +55,5 @@ const blogPostPropType = PropTypes.shape({
 
 BlogPost.propTypes = {
   post: blogPostPropType.isRequired,
-  onFilterByAuthor: PropTypes.func.isRequired,
-  onFilterByTags: PropTypes.func.isRequired
+  onFilterByAuthor: PropTypes.func.isRequired
 };
