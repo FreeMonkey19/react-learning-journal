@@ -3,17 +3,33 @@ import { BlogPost } from "./BlogPost";
 import { data } from "./data.js";
 
 export class AllPosts extends Component {
-  state = { allPosts: [] };
+  state = { posts: [] };
 
   componentDidMount() {
-    this.setState({ allPosts: data });
+    this.setState({ posts: data });
   }
+
+  onFilterByAuthor = authName => {
+    const filteredPosts = this.state.posts.filter(post => {
+      return authName === post.author;
+    });
+
+    this.setState({
+      posts: filteredPosts
+    });
+  };
 
   render() {
     return (
       <div className="AllPosts">
-        {this.state.allPosts.map(function(post) {
-          return <BlogPost post={post} key={post.id} />;
+        {this.state.posts.map(post => {
+          return (
+            <BlogPost
+              onFilterByAuthor={this.onFilterByAuthor}
+              post={post}
+              key={post.id}
+            />
+          );
         })}
       </div>
     );

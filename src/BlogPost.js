@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 
 export class BlogPost extends Component {
   render() {
-    console.log(this.props.post);
-    const { post } = this.props;
+    const { post, onFilterByAuthor } = this.props;
 
     function renderDate(date) {
       const datePieces = date.split("-");
@@ -21,9 +20,9 @@ export class BlogPost extends Component {
 
         <div className="author-container">
           Published By:
-          <a href="#" className="post-author">
+          <button onClick={() => onFilterByAuthor(post.author)}>
             {post.author}
-          </a>
+          </button>
         </div>
 
         <span className="date-created">{renderDate(post.createdOn)}</span>
@@ -55,5 +54,6 @@ const blogPostPropType = PropTypes.shape({
 });
 
 BlogPost.propTypes = {
-  post: blogPostPropType.isRequired
+  post: blogPostPropType.isRequired,
+  onFilterByAuthor: PropTypes.func.isRequired
 };

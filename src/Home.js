@@ -9,7 +9,6 @@ export class Home extends Component {
     this.setState({ post: data[0] });
   }
   render() {
-    console.log("render home", this.state.post.title);
     if (this.state.post.id == null) {
       return null;
     }
