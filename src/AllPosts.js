@@ -3,7 +3,7 @@ import { BlogPost } from "./BlogPost";
 import { data } from "./data.js";
 
 export class AllPosts extends Component {
-  state = { posts: [] };
+  state = { posts: [], filteredAuthorName: null };
 
   componentDidMount() {
     this.setState({ posts: data });
@@ -15,13 +15,20 @@ export class AllPosts extends Component {
     });
 
     this.setState({
-      posts: filteredPosts
+      posts: filteredPosts,
+      filteredAuthorName: authName
     });
   };
 
   render() {
     return (
       <div className="AllPosts">
+        {this.state.filteredAuthorName != null && (
+          <div className="authAndTagDiv">
+            {`Showing all posts by: ${this.state.filteredAuthorName}`}
+          </div>
+        )}
+
         {this.state.posts.map(post => {
           return (
             <BlogPost
