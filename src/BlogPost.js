@@ -33,9 +33,13 @@ export class BlogPost extends Component {
           <span className="tag-container">Key Words:</span>
           {post.tags.map(function(tag) {
             return (
-              <a href="#" className="post-tag" key={tag}>
-                {tag}
-              </a>
+              <button
+                className="post-tag"
+                key={tag}
+                onClick={() => onFilterByTags(post.tag)}
+              >
+                {post.tag}
+              </button>
             );
           })}
         </div>
@@ -55,5 +59,6 @@ const blogPostPropType = PropTypes.shape({
 
 BlogPost.propTypes = {
   post: blogPostPropType.isRequired,
-  onFilterByAuthor: PropTypes.func.isRequired
+  onFilterByAuthor: PropTypes.func.isRequired,
+  onFilterByTags: PropTypes.func.isRequired
 };
