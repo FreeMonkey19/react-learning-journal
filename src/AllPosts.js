@@ -3,20 +3,33 @@ import { BlogPost } from "./BlogPost";
 import { data } from "./data.js";
 
 export class AllPosts extends Component {
-  state = { posts: [], filteredAuthorName: null };
-
+  state = {
+    posts: [],
+    postsToBeRendered: [],
+    filteredAuthorName: null,
+    filteredTagName: null
+  };
   componentDidMount() {
-    this.setState({ posts: data });
+    this.setState({ posts: data, postsToBeRendered: data });
   }
 
   onFilterByAuthor = authName => {
     const filteredPosts = this.state.posts.filter(post => {
       return authName === post.author;
     });
+    this.setState({
+      postsToBeRendered: filteredPosts,
+      filteredAuthorName: authName
+    });
+  };
+
+  onFilterByTag = tagName => {
+    const filteredPosts = this.state.posts.filter(post => {
+      return post.tags.includes(tagName);
+    });
 
     this.setState({
-      posts: filteredPosts,
-      filteredAuthorName: authName
+      postsToBeRendered: filteredPosts
     });
   };
 
@@ -29,10 +42,11 @@ export class AllPosts extends Component {
           </div>
         )}
 
-        {this.state.posts.map(post => {
+        {this.state.postsToBeRendered.map(post => {
           return (
             <BlogPost
               onFilterByAuthor={this.onFilterByAuthor}
+              onFilterByTag={this.onFilterByTag}
               post={post}
               key={post.id}
             />
