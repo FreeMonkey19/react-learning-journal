@@ -3,8 +3,10 @@ import ReactDOM from "react-dom";
 import { App } from "./App";
 import { BlogPost } from "./BlogPost";
 import { render, fireEvent } from "react-testing-library";
-import { AllPosts } from "./ALlPosts";
-import { MemoryRouter } from "react-router";
+import { AllPosts } from "./AllPosts";
+import { SinglePost } from "./SinglePost.js";
+import { MemoryRouter, Route } from "react-router";
+import "jest-dom/extend-expect";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -127,30 +129,46 @@ it("renders all posts", () => {
   expect(getByText(posts[1].title)).toBeInTheDocument();
 });
 
-// it("renders single post after title click", () => {
-//   const postWeWant = {};
-//   const otherPost = {};
-//   const posts = [postWeWant, otherPost];
-//   const testPosts = [
-//     {
-//       id: 0,
-//       title: "Mary had a little lamb, little lamb, little lamb.",
-//       author: "Charlotte Mickey Mouse",
-//       createdOn: "2019-01-02",
-//       body: `No worries. No cares.`,
-//       tags: ["trees", "rocks"]
-//     },
-//     {
-//       id: 1,
-//       title: "Two",
-//       author: "Dan",
-//       createdOn: "2018-12-28",
-//       body: `So often we avoid running water`,
-//       tags: ["trees", "water"]
-//     }
-//   ];
+it.skip("renders single post after title click", () => {
+  const postWeWant = {
+    id: 0,
+    title: "Mary had a little lamb, little lamb, little lamb.",
+    author: "Charlotte Mickey Mouse",
+    createdOn: "2019-01-02",
+    body: `No worries. No cares.`,
+    tags: ["trees", "rocks"]
+  };
+  const otherPost = {
+    id: 1,
+    title: "Two",
+    author: "Dan",
+    createdOn: "2018-12-28",
+    body: `So often we avoid running water`,
+    tags: ["trees", "water"]
+  };
+  const posts = [postWeWant, otherPost];
+  console.log(posts);
 
-//   const { getByText } = render(<AllPosts allPosts={posts} />);
-//   expect(getByText(postWeWant.title)).toBeInTheDocument();
-//   expect(getByText(otherPost.title)).toBeInTheDocument();
-// });
+  const { getByText } = render(
+    <MemoryRouter>
+      <div>
+        <Route
+          exact
+          path="/posts"
+          component={() => <AllPosts posts={posts} />}
+        />
+        <Route path="/posts/:id" component={SinglePost} />
+      </div>
+    </MemoryRouter>
+  );
+
+  expect(getByText(postWeWant.title)).toBeInTheDocument();
+  expect(getByText(otherPost.title)).toBeInTheDocument();
+
+  console.log(postWeWant.title);
+  console.log(otherPost.title);
+
+  fireEvent.click(getByText(postWeWant.title), { button: 0 });
+  expect(getByText(postWeWant.title)).toBeInTheDocument();
+  expect(getByText(otherPost.title)).toBeInTheDocument();
+});
