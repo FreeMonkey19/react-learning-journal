@@ -9,6 +9,7 @@ export class AllPosts extends Component {
     filteredAuthorName: null,
     filteredTagName: null
   };
+
   componentDidMount() {
     this.setState({ posts: data, postsToBeRendered: data });
   }
@@ -19,7 +20,8 @@ export class AllPosts extends Component {
     });
     this.setState({
       postsToBeRendered: filteredPosts,
-      filteredAuthorName: authName
+      filteredAuthorName: authName,
+      filteredTagName: null
     });
   };
 
@@ -29,7 +31,9 @@ export class AllPosts extends Component {
     });
 
     this.setState({
-      postsToBeRendered: filteredPosts
+      postsToBeRendered: filteredPosts,
+      filteredTagName: tagName,
+      filteredAuthorName: null
     });
   };
 
@@ -39,6 +43,11 @@ export class AllPosts extends Component {
         {this.state.filteredAuthorName != null && (
           <div className="authAndTagDiv">
             {`Showing all posts by: ${this.state.filteredAuthorName}`}
+          </div>
+        )}
+        {this.state.filteredTagName != null && (
+          <div className="authAndTagDiv">
+            {`Showing all posts by Key Word: ${this.state.filteredTagName}`}
           </div>
         )}
 
