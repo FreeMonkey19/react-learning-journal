@@ -8,6 +8,7 @@ import { SinglePost } from "./SinglePost.js";
 import { About } from "./About.js";
 import { Contact } from "./Contact.js";
 import { BrowserRouter } from "react-router-dom";
+import { AllPostsContainer } from "./AllPostsContainer.js";
 
 export class App extends Component {
   render() {
@@ -18,7 +19,7 @@ export class App extends Component {
             <Header />
 
             {/* <Route exact path="/" component={Home} /> */}
-            <Route exact path="/posts" component={AllPosts} />
+            <Route exact path="/posts" component={AllPostsContainer} />
             <Route path="/posts/:id" component={SinglePost} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />

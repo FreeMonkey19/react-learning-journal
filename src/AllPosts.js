@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import { BlogPost } from "./BlogPost";
-import { data } from "./data.js";
 
 export class AllPosts extends Component {
   state = {
-    posts: [],
-    postsToBeRendered: [],
+    posts: this.props.allPosts,
+    postsToBeRendered: this.props.allPosts,
     filteredAuthorName: null,
     filteredTagName: null
   };
-
-  componentDidMount() {
-    this.setState({ posts: data, postsToBeRendered: data });
-  }
 
   onFilterByAuthor = authName => {
     const filteredPosts = this.state.posts.filter(post => {
