@@ -5,8 +5,22 @@ import { BlogPost } from "./BlogPost";
 import { render, fireEvent } from "react-testing-library";
 import { AllPosts } from "./AllPosts";
 import { SinglePost } from "./SinglePost.js";
-import { MemoryRouter, Route } from "react-router";
+import { Router, Route } from "react-router";
 import "jest-dom/extend-expect";
+import { createMemoryHistory } from "history";
+
+function renderWithRouter(
+  ui,
+  {
+    route = "/",
+    history = createMemoryHistory({ initialEntries: [route] })
+  } = {}
+) {
+  return {
+    ...render(<Router history={history}>{ui}</Router>),
+    history
+  };
+}
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -57,11 +71,7 @@ it("renders a post", () => {
 
   const authorRegex = new RegExp(post.author);
 
-  const { getByText } = render(
-    <MemoryRouter>
-      <BlogPost post={post} />
-    </MemoryRouter>
-  );
+  const { getByText } = renderWithRouter(<BlogPost post={post} />);
   expect(getByText(post.title)).toBeInTheDocument();
   expect(getByText(post.title)).toHaveClass("post-title");
 
@@ -120,16 +130,12 @@ it("renders all posts", () => {
     }
   ];
 
-  const { getByText } = render(
-    <MemoryRouter>
-      <AllPosts allPosts={posts} />
-    </MemoryRouter>
-  );
+  const { getByText } = renderWithRouter(<AllPosts allPosts={posts} />);
   expect(getByText(posts[0].title)).toBeInTheDocument();
   expect(getByText(posts[1].title)).toBeInTheDocument();
 });
 
-it.skip("renders single post after title click", () => {
+it("renders single post after title click", () => {
   const postWeWant = {
     id: 0,
     title: "Mary had a little lamb, little lamb, little lamb.",
@@ -147,28 +153,23 @@ it.skip("renders single post after title click", () => {
     tags: ["trees", "water"]
   };
   const posts = [postWeWant, otherPost];
-  console.log(posts);
 
-  const { getByText } = render(
-    <MemoryRouter>
-      <div>
-        <Route
-          exact
-          path="/posts"
-          component={() => <AllPosts posts={posts} />}
-        />
-        <Route path="/posts/:id" component={SinglePost} />
-      </div>
-    </MemoryRouter>
+  const route = "/posts";
+
+  const { getByText, queryByText } = renderWithRouter(
+    <div>
+      <Route exact path="/posts" component={() => <AllPosts posts={posts} />} />
+      <Route path="/posts/:id" component={SinglePost} />
+    </div>,
+    {
+      route: route
+    }
   );
 
   expect(getByText(postWeWant.title)).toBeInTheDocument();
   expect(getByText(otherPost.title)).toBeInTheDocument();
 
-  console.log(postWeWant.title);
-  console.log(otherPost.title);
-
-  fireEvent.click(getByText(postWeWant.title), { button: 0 });
+  fireEvent.click(getByText(postWeWant.title));
   expect(getByText(postWeWant.title)).toBeInTheDocument();
-  expect(getByText(otherPost.title)).toBeInTheDocument();
+  expect(queryByText(otherPost.title)).not.toBeInTheDocument();
 });
