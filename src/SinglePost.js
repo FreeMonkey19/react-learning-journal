@@ -13,7 +13,6 @@ export class SinglePost extends Component {
     this.setState({ post: currentPost });
   }
   render() {
-    console.log("single post ", this.state.post);
     if (this.state.post.id == null) {
       return null;
     }

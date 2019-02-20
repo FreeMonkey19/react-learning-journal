@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { data } from "./data.js";
 import { BlogPost } from "./BlogPost.js";
+// import { Sidebar } from ".Sidebar.js";
 
 export class Home extends Component {
   state = { post: {} };
