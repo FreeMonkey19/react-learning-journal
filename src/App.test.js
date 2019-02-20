@@ -172,3 +172,69 @@ it.skip("renders single post after title click", () => {
   expect(getByText(postWeWant.title)).toBeInTheDocument();
   expect(getByText(otherPost.title)).toBeInTheDocument();
 });
+
+it("filter by author", () => {
+  const postWeWant = {
+    id: 0,
+    title: "Mary had a little lamb, little lamb, little lamb.",
+    author: "Charlotte Mickey Mouse",
+    createdOn: "2019-01-02",
+    body: `No worries. No cares.`,
+    tags: ["trees", "rocks"]
+  };
+  const otherPost = {
+    id: 1,
+    title: "Two",
+    author: "Dan",
+    createdOn: "2018-12-28",
+    body: `So often we avoid running water`,
+    tags: ["trees", "water"]
+  };
+  const posts = [postWeWant, otherPost];
+
+  const { getByText, queryByText } = render(
+    <MemoryRouter>
+      <AllPosts allPosts={posts} />
+    </MemoryRouter>
+  );
+
+  expect(getByText(postWeWant.author)).toBeInTheDocument();
+  expect(getByText(otherPost.author)).toBeInTheDocument();
+
+  fireEvent.click(getByText(postWeWant.author));
+  expect(getByText(postWeWant.author)).toBeInTheDocument();
+  expect(queryByText(otherPost.author)).not.toBeInTheDocument();
+});
+
+it("filter by tag", () => {
+  const postWeWant = {
+    id: 0,
+    title: "Mary had a little lamb, little lamb, little lamb.",
+    author: "Charlotte Mickey Mouse",
+    createdOn: "2019-01-02",
+    body: `No worries. No cares.`,
+    tags: ["pink", "purple"]
+  };
+  const otherPost = {
+    id: 1,
+    title: "Two",
+    author: "Dan",
+    createdOn: "2018-12-28",
+    body: `So often we avoid running water`,
+    tags: ["yellow", "red"]
+  };
+  const posts = [postWeWant, otherPost];
+
+  const { getByText, queryByText } = render(
+    <MemoryRouter>
+      <AllPosts allPosts={posts} />
+    </MemoryRouter>
+  );
+
+  expect(getByText(postWeWant.tags[0])).toBeInTheDocument();
+  expect(getByText(otherPost.tags[1])).toBeInTheDocument();
+
+  fireEvent.click(getByText(postWeWant.tags[0]));
+  expect(getByText(postWeWant.tags[0])).toBeInTheDocument();
+  expect(queryByText(otherPost.tags[1])).not.toBeInTheDocument();
+});

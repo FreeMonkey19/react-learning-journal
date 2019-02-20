@@ -3,14 +3,13 @@ import { BlogPost } from "./BlogPost";
 
 export class AllPosts extends Component {
   state = {
-    posts: this.props.allPosts,
     postsToBeRendered: this.props.allPosts,
     filteredAuthorName: null,
     filteredTagName: null
   };
 
   onFilterByAuthor = authName => {
-    const filteredPosts = this.state.posts.filter(post => {
+    const filteredPosts = this.props.allPosts.filter(post => {
       return authName === post.author;
     });
     this.setState({
@@ -21,7 +20,7 @@ export class AllPosts extends Component {
   };
 
   onFilterByTag = tagName => {
-    const filteredPosts = this.state.posts.filter(post => {
+    const filteredPosts = this.props.allPosts.filter(post => {
       return post.tags.includes(tagName);
     });
 
