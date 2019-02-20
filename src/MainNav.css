@@ -5,12 +5,26 @@
   background-color: lightseagreen;
 }
 
+.nav-link-container {
+  padding-right: 10px;
+  margin-right: 10px;
+  border-right: solid black 1px;
+}
+
+.nav-link-container:last-of-type {
+  padding-right: 0;
+  border-right: none;
+  margin-right: 0;
+}
+
 .nav-link {
-  margin-right: 20px;
   color: black;
   text-decoration: none;
 }
+.nav-link:not(.active):hover {
+  color: gray;
+}
 
-.nav-link:last-of-type {
-  margin-right: 0;
+.nav-link.active {
+  color: lightcyan;
 }
