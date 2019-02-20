@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { data } from "./data.js";
 import { BlogPost } from "./BlogPost.js";
-// import { Sidebar } from ".Sidebar.js";
+import { Sidebar } from "./Sidebar.js";
 
 export class Home extends Component {
   state = { post: {} };
@@ -13,6 +13,11 @@ export class Home extends Component {
     if (this.state.post.id == null) {
       return null;
     }
-    return <BlogPost post={this.state.post} />;
+    return (
+      <div>
+        <BlogPost post={this.state.post} />
+        <Sidebar />
+      </div>
+    );
   }
 }

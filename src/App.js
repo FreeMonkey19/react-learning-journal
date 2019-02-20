@@ -18,7 +18,7 @@ export class App extends Component {
           <div>
             <Header />
 
-            {/* <Route exact path="/" component={Home} /> */}
+            <Route exact path="/" component={Home} />
             <Route exact path="/posts" component={AllPostsContainer} />
             <Route path="/posts/:id" component={SinglePost} />
             <Route path="/about" component={About} />
