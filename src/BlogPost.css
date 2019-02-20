@@ -1,3 +1,10 @@
 .post-title {
   color: red;
 }
+
+/* .post-title.active {
+  color: lightcyan;
+}
+.post-title:not(.active):hover {
+  color: purple;
+} */

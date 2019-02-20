@@ -22,7 +22,7 @@
   text-decoration: none;
 }
 .nav-link:not(.active):hover {
-  color: gray;
+  color: purple;
 }
 
 .nav-link.active {

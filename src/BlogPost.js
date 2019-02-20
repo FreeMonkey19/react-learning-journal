@@ -15,8 +15,8 @@ export class BlogPost extends Component {
 
     return (
       <div className="post-container">
-        <h2 className="post-title">
-          <Link className="post-title" to={`/posts/${post.id}`}>
+        <h2 className="post-title-wrapper">
+          <Link className="post-title active" to={`/posts/${post.id}`}>
             {post.title}
           </Link>
         </h2>
