@@ -19,7 +19,6 @@
 .sidebar-pics-container {
   display: none;
   display: flex block;
-  height: 250px;
 }
 .sidebar-pic {
   height: 130px;
@@ -38,7 +37,7 @@
 @media (min-width: 600px) {
   .sidebar-container {
     width: 200px;
-    height: 400px;
+    /* height: 400px; */
   }
 
   .sidebar-pics-container {
