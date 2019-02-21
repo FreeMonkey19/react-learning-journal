@@ -1,6 +1,10 @@
 .sidebar-container {
-  border: 3px solid lightseagreen;
-  margin: 20px;
+  margin: 40px 15px 40px 15px;
+}
+
+.sidebar-nav {
+  border: red solid 1px;
+  margin-bottom: 3px;
 }
 
 .sidebar-quote {
@@ -8,13 +12,9 @@
 }
 .sidebar-nav-link {
   margin-left: 20px;
-  /* padding-bottom: 10px; */
 }
 .sidebar-nav-link-container {
   margin-bottom: 10px;
-}
-.sidebar-pic {
-  margin: 25px 10px 25px 10px;
 }
 .sidebar-pics-container {
   display: none;
@@ -22,9 +22,17 @@
   height: 250px;
 }
 .sidebar-pic {
-  width: 200px;
-  height: 125px;
-  margin: auto;
+  height: 130px;
+  border: solid black 1px;
+  margin-bottom: 3px;
+  padding: 2px;
+}
+.sidebar-pic:last-of-type {
+  margin-bottom: 0;
+}
+.sidebar-quote-container {
+  border: orange solid 1px;
+  margin-bottom: 3px;
 }
 
 @media (min-width: 600px) {

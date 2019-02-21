@@ -6,7 +6,7 @@ export class Sidebar extends Component {
   render() {
     return (
       <div className="sidebar-container">
-        <div>
+        <div className="sidebar-quote-container">
           <h2 className="sidebar-quote">Sidebar Quote</h2>
         </div>
         <div className="sidebar-nav">
