@@ -5,12 +5,12 @@ import "./Sidebar.css";
 export class Sidebar extends Component {
   render() {
     return (
-      <div class="sidebar-container">
-        <div class="sidebar-content">
+      <div className="sidebar-container">
+        <div className="sidebar-content">
           <div>
-            <h2 class="sidebar-quote">Sidebar Quote</h2>
+            <h2 className="sidebar-quote">Sidebar Quote</h2>
           </div>
-          <div class="sidebar-nav">
+          <div className="sidebar-nav">
             <div>
               <Link
                 target="blank"

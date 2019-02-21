@@ -1,6 +1,8 @@
 .title-container {
-  background-color: lightcyan;
+  background-color: rgb(86, 154, 145);
   text-align: center;
   padding: 10px;
-  font-family: "Pacifico", cursive;
+}
+.header-subtitle {
+  font-style: italic;
 }

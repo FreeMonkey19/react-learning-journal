@@ -41,7 +41,7 @@ it("renders main nav and nav links", () => {
 
   const getNavLinks = getByTitle("main-nav-link");
   expect(getNavLinks).toBeInTheDocument();
-  expect(getNavLinks).toHaveClass("nav-link");
+  expect(getNavLinks).toHaveClass("nav-link-container");
   expect(getNavLinks).toBeVisible();
 });
 
@@ -66,19 +66,21 @@ it("renders a post", () => {
   expect(getByText(post.title)).toHaveClass("post-title");
 
   expect(getByText(authorRegex)).toBeInTheDocument();
-  expect(getByText(authorRegex)).toHaveClass("post-author");
+  expect(getByText(authorRegex)).toHaveClass("author-and-tag-buttons");
 
   const newDate = new RegExp("Publish Date:");
 
   expect(getByText(newDate)).toBeInTheDocument();
-  expect(getByText(newDate)).toHaveClass("date-created");
+  expect(getByText(newDate)).toHaveClass("post-created-on");
 
   expect(getByText(post.body)).toBeInTheDocument();
   expect(getByText(post.body)).toHaveClass("post-body");
 
   const tagsString = new RegExp("Key Words:");
   expect(getByText(tagsString)).toBeInTheDocument();
-  expect(getByText(tagsString)).toHaveClass("tag-container");
+  expect(getByText(tagsString)).toHaveClass(
+    "author-tag-date-created-containers"
+  );
 
   expect(getByText(post.tags[0])).toBeInTheDocument();
   expect(getByText(post.tags[1])).toBeInTheDocument();

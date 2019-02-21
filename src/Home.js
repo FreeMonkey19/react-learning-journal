@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { data } from "./data.js";
 import { BlogPost } from "./BlogPost.js";
 import { Sidebar } from "./Sidebar.js";
+import "./Home.css";
 
 export class Home extends Component {
   state = { post: {} };
@@ -14,7 +15,7 @@ export class Home extends Component {
       return null;
     }
     return (
-      <div>
+      <div className="home-post-page">
         <BlogPost post={this.state.post} />
         <Sidebar />
       </div>

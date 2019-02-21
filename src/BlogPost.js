@@ -21,25 +21,29 @@ export class BlogPost extends Component {
           </Link>
         </h2>
 
-        <div className="author-container">
+        <div className="author-tag-date-created-containers">
           Published By:
           <button
-            className="post-author"
+            className="author-and-tag-buttons"
             onClick={() => onFilterByAuthor(post.author)}
           >
             {post.author}
           </button>
         </div>
 
-        <span className="date-created">{renderDate(post.createdOn)}</span>
+        <span className="post-created-on">{renderDate(post.createdOn)}</span>
 
         <div className="post-body">{post.body}</div>
 
         <div className="tags-container">
-          <span className="tag-container">Key Words:</span>
+          <span className="author-tag-date-created-containers">Key Words:</span>
           {post.tags.map(function(tag) {
             return (
-              <button key={tag} onClick={() => onFilterByTag(tag)}>
+              <button
+                className="author-and-tag-buttons"
+                key={tag}
+                onClick={() => onFilterByTag(tag)}
+              >
                 {tag}
               </button>
             );
