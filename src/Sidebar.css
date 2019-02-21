@@ -8,13 +8,32 @@
 }
 .sidebar-nav-link {
   margin-left: 20px;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
+}
+.sidebar-nav-link-container {
+  margin-bottom: 10px;
+}
+.sidebar-pic {
+  margin: 25px 10px 25px 10px;
+}
+.sidebar-pics-container {
+  display: none;
+  display: flex block;
+  height: 250px;
+}
+.sidebar-pic {
+  width: 200px;
+  height: 125px;
+  margin: auto;
 }
 
 @media (min-width: 600px) {
   .sidebar-container {
     width: 200px;
     height: 400px;
-    background-color: purple;
+  }
+
+  .sidebar-pics-container {
+    display: unset;
   }
 }
