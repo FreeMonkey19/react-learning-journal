@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export class BlogPost extends Component {
   render() {
-    const { post, onFilterByAuthor } = this.props;
+    const { post, onFilterByAuthor, onFilterByTag } = this.props;
 
     function renderDate(date) {
       const datePieces = date.split("-");
@@ -15,12 +15,17 @@ export class BlogPost extends Component {
     return (
       <div className="post-container">
         <h2 className="post-title">
-          <Link to={`/posts/${post.id}`}>{post.title}</Link>
+          <Link className="post-title" to={`/posts/${post.id}`}>
+            {post.title}
+          </Link>
         </h2>
 
         <div className="author-container">
           Published By:
-          <button onClick={() => onFilterByAuthor(post.author)}>
+          <button
+            className="post-author"
+            onClick={() => onFilterByAuthor(post.author)}
+          >
             {post.author}
           </button>
         </div>
@@ -33,9 +38,9 @@ export class BlogPost extends Component {
           <span className="tag-container">Key Words:</span>
           {post.tags.map(function(tag) {
             return (
-              <a href="#" className="post-tag" key={tag}>
+              <button key={tag} onClick={() => onFilterByTag(tag)}>
                 {tag}
-              </a>
+              </button>
             );
           })}
         </div>
@@ -44,16 +49,17 @@ export class BlogPost extends Component {
   }
 }
 
-const blogPostPropType = PropTypes.shape({
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  createdOn: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired
-});
+// const blogPostPropType = PropTypes.shape({
+//   id: PropTypes.number.isRequired,
+//   title: PropTypes.string.isRequired,
+//   author: PropTypes.string.isRequired,
+//   createdOn: PropTypes.string.isRequired,
+//   body: PropTypes.string.isRequired,
+//   tags: PropTypes.arrayOf(PropTypes.string).isRequired
+// });
 
-BlogPost.propTypes = {
-  post: blogPostPropType.isRequired,
-  onFilterByAuthor: PropTypes.func.isRequired
-};
+// BlogPost.propTypes = {
+//   post: blogPostPropType.isRequired,
+//   onFilterByAuthor: PropTypes.func.isRequired,
+//   onFilterByTag: PropTypes.func.isRequired
+// };
