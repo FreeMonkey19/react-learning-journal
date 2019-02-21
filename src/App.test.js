@@ -195,10 +195,8 @@ it("filter by author", () => {
   };
   const posts = [postWeWant, otherPost];
 
-  const { getByText, queryByText } = render(
-    <MemoryRouter>
-      <AllPosts allPosts={posts} />
-    </MemoryRouter>
+  const { getByText, queryByText } = renderWithRouter(
+    <AllPosts allPosts={posts} />
   );
 
   expect(getByText(postWeWant.author)).toBeInTheDocument();
@@ -228,10 +226,8 @@ it("filter by tag", () => {
   };
   const posts = [postWeWant, otherPost];
 
-  const { getByText, queryByText } = render(
-    <MemoryRouter>
-      <AllPosts allPosts={posts} />
-    </MemoryRouter>
+  const { getByText, queryByText } = renderWithRouter(
+    <AllPosts allPosts={posts} />
   );
 
   expect(getByText(postWeWant.tags[0])).toBeInTheDocument();

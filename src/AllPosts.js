@@ -32,6 +32,7 @@ export class AllPosts extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <div className="AllPosts">
         {this.state.filteredAuthorName != null && (
