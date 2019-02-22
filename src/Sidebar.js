@@ -12,25 +12,7 @@ export class Sidebar extends Component {
             neighborhood...a wonderful day!
           </p>
         </div>
-        <ul className="sidebar-nav">
-          <li>
-            <a
-              className="sidebar-a-link"
-              href="https://github.com/charlottewarfel"
-              target="_blank"
-            >
-              gitHub
-            </a>
 
-            <a
-              className="sidebar-a-link"
-              href="https://www.linkedin.com/in/charlotte-warfel-481120177/"
-              target="_blank"
-            >
-              LinkedIn
-            </a>
-          </li>
-        </ul>
         <div className="sidebar-pics-container">
           <div className="sidebar-pic">
             Picture here hard coded for styling purposes
@@ -38,6 +20,23 @@ export class Sidebar extends Component {
           <div className="sidebar-pic">
             Another picture hardcoded for styling purposes
           </div>
+        </div>
+        <div className="sidebar-nav">
+          <a
+            className="sidebar-a-link"
+            href="https://github.com/charlottewarfel"
+            target="_blank"
+          >
+            gitHub
+          </a>
+
+          <a
+            className="sidebar-a-link"
+            href="https://www.linkedin.com/in/charlotte-warfel-481120177/"
+            target="_blank"
+          >
+            LinkedIn
+          </a>
         </div>
       </div>
     );

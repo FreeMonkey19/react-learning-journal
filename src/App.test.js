@@ -160,7 +160,11 @@ it("renders single post after title click", () => {
 
   const { getByText, queryByText } = renderWithRouter(
     <div>
-      <Route exact path="/posts" component={() => <AllPosts posts={posts} />} />
+      <Route
+        exact
+        path="/posts"
+        component={() => <AllPosts allPosts={posts} />}
+      />
       <Route path="/posts/:id" component={SinglePost} />
     </div>,
     {

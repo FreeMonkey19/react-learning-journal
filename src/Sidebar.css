@@ -3,8 +3,9 @@
 }
 
 .sidebar-nav {
-  border: red solid 1px;
-  margin-bottom: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .sidebar-quote {
@@ -15,7 +16,7 @@
 }
 .sidebar-a-link {
   text-decoration: none;
-  color: blue;
+  padding: 10px;
   margin: 10px;
 }
 .sidebar-a-link:last-of-type {
@@ -27,12 +28,11 @@
 
 .sidebar-pics-container {
   display: none;
-  display: flex block;
 }
 .sidebar-pic {
-  height: 130px;
+  height: 150px;
   border: solid black 1px;
-  margin-bottom: 3px;
+  margin-bottom: 10px;
   padding: 2px;
 }
 .sidebar-pic:last-of-type {
@@ -41,13 +41,13 @@
 .sidebar-quote-container {
   border: rgb(255, 73, 0) solid 3px;
   border-radius: 35px;
+  margin-top: 10px;
   margin-bottom: 3px;
 }
 
 @media (min-width: 600px) {
   .sidebar-container {
     width: 200px;
-    /* height: 400px; */
   }
 
   .sidebar-pics-container {
