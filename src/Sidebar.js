@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "./Sidebar.css";
+import rollerCoaster from "./images/roller-coaster.png";
+import staggerPic from "./images/stagger.png";
 
 export class Sidebar extends Component {
   render() {
@@ -15,10 +16,20 @@ export class Sidebar extends Component {
 
         <div className="sidebar-pics-container">
           <div className="sidebar-pic">
-            Picture here hard coded for styling purposes
+            <img
+              src={staggerPic}
+              alt="Cartoon roller coaster"
+              height="150"
+              width="200"
+            />
           </div>
           <div className="sidebar-pic">
-            Another picture hardcoded for styling purposes
+            <img
+              src={rollerCoaster}
+              alt="Cartoon roller coaster"
+              height="150"
+              width="200"
+            />
           </div>
         </div>
         <div className="sidebar-nav">
@@ -26,6 +37,7 @@ export class Sidebar extends Component {
             className="sidebar-a-link"
             href="https://github.com/charlottewarfel"
             target="_blank"
+            rel="noopener noreferrer"
           >
             gitHub
           </a>
@@ -34,6 +46,7 @@ export class Sidebar extends Component {
             className="sidebar-a-link"
             href="https://www.linkedin.com/in/charlotte-warfel-481120177/"
             target="_blank"
+            rel="noopener noreferrer"
           >
             LinkedIn
           </a>
