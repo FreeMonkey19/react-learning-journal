@@ -7,29 +7,30 @@ export class Sidebar extends Component {
     return (
       <div className="sidebar-container">
         <div className="sidebar-quote-container">
-          <h2 className="sidebar-quote">Sidebar Quote</h2>
+          <p className="sidebar-quote">
+            It's a wonderful day in the neighborhood, a wonderful day in the
+            neighborhood...a wonderful day!
+          </p>
         </div>
-        <div className="sidebar-nav">
-          <div className="sidebar-nav-link-container">
-            <Link
-              target="blank"
-              className="sidebar-nav-link"
-              to="https://github.com/charlottewarfel"
+        <ul className="sidebar-nav">
+          <li>
+            <a
+              className="sidebar-a-link"
+              href="https://github.com/charlottewarfel"
+              target="_blank"
             >
               gitHub
-            </Link>
-          </div>
-          <div className="sidebar-nav-link-container">
-            <Link
-              target="blank"
-              className="sidebar-nav-link"
-              to="https://www.linkedin.com/in/charlotte-warfel-481120177/"
+            </a>
+
+            <a
+              className="sidebar-a-link"
+              href="https://www.linkedin.com/in/charlotte-warfel-481120177/"
+              target="_blank"
             >
               LinkedIn
-            </Link>
-          </div>
-        </div>
-
+            </a>
+          </li>
+        </ul>
         <div className="sidebar-pics-container">
           <div className="sidebar-pic">
             Picture here hard coded for styling purposes

@@ -9,13 +9,22 @@
 
 .sidebar-quote {
   text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: rgb(71, 0, 89);
 }
-.sidebar-nav-link {
-  margin-left: 20px;
+.sidebar-a-link {
+  text-decoration: none;
+  color: blue;
+  margin: 10px;
 }
-.sidebar-nav-link-container {
-  margin-bottom: 10px;
+.sidebar-a-link:last-of-type {
+  padding-left: 0;
 }
+.sidebar-a-link:hover {
+  text-decoration: underline;
+}
+
 .sidebar-pics-container {
   display: none;
   display: flex block;
@@ -30,7 +39,8 @@
   margin-bottom: 0;
 }
 .sidebar-quote-container {
-  border: orange solid 1px;
+  border: rgb(255, 73, 0) solid 3px;
+  border-radius: 35px;
   margin-bottom: 3px;
 }
 

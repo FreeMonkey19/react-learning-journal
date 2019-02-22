@@ -6,6 +6,7 @@
 }
 
 .nav-link-container {
+  display: inline-block;
   padding-right: 10px;
   margin-right: 10px;
   border-right: solid black 1px;
@@ -20,6 +21,7 @@
 .nav-link {
   color: black;
   text-decoration: none;
+  font-size: 15px;
 }
 .nav-link:not(.active):hover {
   color: purple;
@@ -27,4 +29,10 @@
 
 .nav-link.active {
   color: lightcyan;
+}
+
+@media (min-width: 600px) {
+  .nav-link {
+    font-size: 20px;
+  }
 }
