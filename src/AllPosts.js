@@ -51,6 +51,7 @@ export class AllPosts extends Component {
               onFilterByAuthor={this.onFilterByAuthor}
               onFilterByTag={this.onFilterByTag}
               post={post}
+              previewMode={true}
               key={post.id}
             />
           );

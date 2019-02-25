@@ -5,12 +5,21 @@ import "./BlogPost.css";
 
 export class BlogPost extends Component {
   render() {
-    const { post, onFilterByAuthor, onFilterByTag } = this.props;
+    const { post, onFilterByAuthor, onFilterByTag, previewMode } = this.props;
 
     function renderDate(date) {
       const datePieces = date.split("-");
       const [year, month, day] = datePieces;
       return `Publish Date: ${month} - ${day} - ${year}`;
+    }
+    function summaryBody() {
+      if (previewMode === true) {
+        return post.body
+          .split(" ")
+          .slice(0, 51)
+          .join(" ")
+          .concat("...");
+      } else return post.body;
     }
 
     return (
@@ -33,7 +42,7 @@ export class BlogPost extends Component {
 
         <span className="post-created-on">{renderDate(post.createdOn)}</span>
 
-        <div className="post-body">{post.body}</div>
+        <div className="post-body">{summaryBody()}</div>
 
         <div className="tags-container">
           <span className="author-tag-date-created-containers">Key Words:</span>
@@ -54,17 +63,18 @@ export class BlogPost extends Component {
   }
 }
 
-// const blogPostPropType = PropTypes.shape({
-//   id: PropTypes.number.isRequired,
-//   title: PropTypes.string.isRequired,
-//   author: PropTypes.string.isRequired,
-//   createdOn: PropTypes.string.isRequired,
-//   body: PropTypes.string.isRequired,
-//   tags: PropTypes.arrayOf(PropTypes.string).isRequired
-// });
+const blogPostPropType = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  createdOn: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired
+});
 
-// BlogPost.propTypes = {
-//   post: blogPostPropType.isRequired,
-//   onFilterByAuthor: PropTypes.func.isRequired,
-//   onFilterByTag: PropTypes.func.isRequired
-// };
+BlogPost.propTypes = {
+  post: blogPostPropType.isRequired,
+  onFilterByAuthor: PropTypes.func,
+  onFilterByTag: PropTypes.func,
+  previewMode: PropTypes.bool.isRequired
+};

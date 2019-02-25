@@ -16,7 +16,7 @@ export class Home extends Component {
     }
     return (
       <div className="home-post-page">
-        <BlogPost post={this.state.post} />
+        <BlogPost post={this.state.post} previewMode={false} />
         <Sidebar />
       </div>
     );

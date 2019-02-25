@@ -16,6 +16,6 @@ export class SinglePost extends Component {
     if (this.state.post.id == null) {
       return null;
     }
-    return <BlogPost post={this.state.post} />;
+    return <BlogPost post={this.state.post} previewMode={false} />;
   }
 }
