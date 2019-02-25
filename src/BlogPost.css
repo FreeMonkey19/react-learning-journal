@@ -9,7 +9,7 @@
 }
 
 .author-and-tag-buttons {
-  background-color: rgb(145, 224, 228);
+  background-color: white;
   padding: 5px;
   margin: 10px;
   font-size: 12px;
@@ -30,7 +30,7 @@
   margin-top: 10px;
 }
 .authAndTagDiv {
-  color: rgb(134, 23, 134);
+  color: red;
   font-weight: bold;
   margin-top: 10px;
   margin-left: 10px;

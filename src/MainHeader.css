@@ -1,5 +1,6 @@
 .title-container {
-  background-color: rgb(86, 154, 145);
+  background-color: white;
+  /* background-image: linear-gradient(darkblue, lightgreen); */
   text-align: center;
   padding: 10px;
 }

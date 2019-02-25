@@ -1,8 +1,9 @@
 .main-nav {
   padding: 20px;
   font-size: 20px;
-  border: solid black 1px;
-  background-color: rgb(36, 108, 96);
+  /* border: solid black 1px; */
+  /* background-color: rgb(36, 108, 96);  */
+  background-color: whitesmoke;
 }
 
 .nav-link-container {
@@ -28,7 +29,7 @@
 }
 
 .nav-link.active {
-  color: lightcyan;
+  color: darkgray;
 }
 
 @media (min-width: 600px) {
