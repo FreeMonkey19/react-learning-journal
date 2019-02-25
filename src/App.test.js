@@ -55,7 +55,7 @@ it("renders main nav and nav links", () => {
 
   const getNavLinks = getByTitle("main-nav-link");
   expect(getNavLinks).toBeInTheDocument();
-  expect(getNavLinks).toHaveClass("nav-link");
+  expect(getNavLinks).toHaveClass("nav-link-container");
   expect(getNavLinks).toBeVisible();
 });
 
@@ -76,19 +76,21 @@ it("renders a post", () => {
   expect(getByText(post.title)).toHaveClass("post-title");
 
   expect(getByText(authorRegex)).toBeInTheDocument();
-  expect(getByText(authorRegex)).toHaveClass("post-author");
+  expect(getByText(authorRegex)).toHaveClass("author-and-tag-buttons");
 
   const newDate = new RegExp("Publish Date:");
 
   expect(getByText(newDate)).toBeInTheDocument();
-  expect(getByText(newDate)).toHaveClass("date-created");
+  expect(getByText(newDate)).toHaveClass("post-created-on");
 
   expect(getByText(post.body)).toBeInTheDocument();
   expect(getByText(post.body)).toHaveClass("post-body");
 
   const tagsString = new RegExp("Key Words:");
   expect(getByText(tagsString)).toBeInTheDocument();
-  expect(getByText(tagsString)).toHaveClass("tag-container");
+  expect(getByText(tagsString)).toHaveClass(
+    "author-tag-date-created-containers"
+  );
 
   expect(getByText(post.tags[0])).toBeInTheDocument();
   expect(getByText(post.tags[1])).toBeInTheDocument();
@@ -158,7 +160,11 @@ it("renders single post after title click", () => {
 
   const { getByText, queryByText } = renderWithRouter(
     <div>
-      <Route exact path="/posts" component={() => <AllPosts posts={posts} />} />
+      <Route
+        exact
+        path="/posts"
+        component={() => <AllPosts allPosts={posts} />}
+      />
       <Route path="/posts/:id" component={SinglePost} />
     </div>,
     {
@@ -172,4 +178,66 @@ it("renders single post after title click", () => {
   fireEvent.click(getByText(postWeWant.title));
   expect(getByText(postWeWant.title)).toBeInTheDocument();
   expect(queryByText(otherPost.title)).not.toBeInTheDocument();
+});
+
+it("filter by author", () => {
+  const postWeWant = {
+    id: 0,
+    title: "Mary had a little lamb, little lamb, little lamb.",
+    author: "Charlotte Mickey Mouse",
+    createdOn: "2019-01-02",
+    body: `No worries. No cares.`,
+    tags: ["trees", "rocks"]
+  };
+  const otherPost = {
+    id: 1,
+    title: "Two",
+    author: "Dan",
+    createdOn: "2018-12-28",
+    body: `So often we avoid running water`,
+    tags: ["trees", "water"]
+  };
+  const posts = [postWeWant, otherPost];
+
+  const { getByText, queryByText } = renderWithRouter(
+    <AllPosts allPosts={posts} />
+  );
+
+  expect(getByText(postWeWant.author)).toBeInTheDocument();
+  expect(getByText(otherPost.author)).toBeInTheDocument();
+
+  fireEvent.click(getByText(postWeWant.author));
+  expect(getByText(postWeWant.author)).toBeInTheDocument();
+  expect(queryByText(otherPost.author)).not.toBeInTheDocument();
+});
+
+it("filter by tag", () => {
+  const postWeWant = {
+    id: 0,
+    title: "Mary had a little lamb, little lamb, little lamb.",
+    author: "Charlotte Mickey Mouse",
+    createdOn: "2019-01-02",
+    body: `No worries. No cares.`,
+    tags: ["pink", "purple"]
+  };
+  const otherPost = {
+    id: 1,
+    title: "Two",
+    author: "Dan",
+    createdOn: "2018-12-28",
+    body: `So often we avoid running water`,
+    tags: ["yellow", "red"]
+  };
+  const posts = [postWeWant, otherPost];
+
+  const { getByText, queryByText } = renderWithRouter(
+    <AllPosts allPosts={posts} />
+  );
+
+  expect(getByText(postWeWant.tags[0])).toBeInTheDocument();
+  expect(getByText(otherPost.tags[1])).toBeInTheDocument();
+
+  fireEvent.click(getByText(postWeWant.tags[0]));
+  expect(getByText(postWeWant.tags[0])).toBeInTheDocument();
+  expect(queryByText(otherPost.tags[1])).not.toBeInTheDocument();
 });

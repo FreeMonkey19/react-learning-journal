@@ -1,0 +1,37 @@
+.post-title {
+  color: rgb(12, 59, 61);
+}
+.post-title:hover {
+  color: purple;
+}
+.post-title:active {
+  color: black;
+}
+
+.author-and-tag-buttons {
+  background-color: white;
+  padding: 5px;
+  margin: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  border: solid black 1px;
+}
+.author-tag-date-created-containers {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.post-created-on {
+  font-weight: bold;
+}
+
+.post-body {
+  line-height: 1.5;
+  margin-top: 10px;
+}
+.auth-and-tag-div {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 10px;
+}

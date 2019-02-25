@@ -6,19 +6,27 @@ export class MainNav extends Component {
   render() {
     return (
       <nav className="main-nav" title="main-nav-bar">
-        <span className="nav-link" title="main-nav-link">
-          <NavLink to="/">Home</NavLink>
+        <span className="nav-link-container" title="main-nav-link">
+          <NavLink className="nav-link" to="/">
+            Home
+          </NavLink>
         </span>
-        <span className="nav-link" title="main-nav-link">
-          <NavLink to="/posts">All Posts</NavLink>
+        <span className="nav-link-container" title="main-nav-link">
+          <NavLink className="nav-link" to="/posts">
+            All Posts
+          </NavLink>
         </span>
 
-        <span className="nav-link" title="main-nav-link">
-          <NavLink to="/about">About</NavLink>
+        <span className="nav-link-container" title="main-nav-link">
+          <NavLink className="nav-link" to="/about">
+            About
+          </NavLink>
         </span>
 
-        <span className="nav-link" title="main-nav-link">
-          <NavLink to="/contact">Contact</NavLink>
+        <span className="nav-link-container" title="main-nav-link">
+          <NavLink className="nav-link" to="/contact">
+            Contact
+          </NavLink>
         </span>
       </nav>
     );

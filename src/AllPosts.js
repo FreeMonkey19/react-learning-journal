@@ -1,21 +1,15 @@
 import React, { Component } from "react";
 import { BlogPost } from "./BlogPost";
-import { data } from "./data.js";
 
 export class AllPosts extends Component {
   state = {
-    posts: [],
-    postsToBeRendered: [],
+    postsToBeRendered: this.props.allPosts,
     filteredAuthorName: null,
     filteredTagName: null
   };
 
-  componentDidMount() {
-    this.setState({ posts: data, postsToBeRendered: data });
-  }
-
   onFilterByAuthor = authName => {
-    const filteredPosts = this.state.posts.filter(post => {
+    const filteredPosts = this.props.allPosts.filter(post => {
       return authName === post.author;
     });
     this.setState({
@@ -26,7 +20,7 @@ export class AllPosts extends Component {
   };
 
   onFilterByTag = tagName => {
-    const filteredPosts = this.state.posts.filter(post => {
+    const filteredPosts = this.props.allPosts.filter(post => {
       return post.tags.includes(tagName);
     });
 
@@ -41,12 +35,12 @@ export class AllPosts extends Component {
     return (
       <div className="AllPosts">
         {this.state.filteredAuthorName != null && (
-          <div className="authAndTagDiv">
+          <div className="auth-and-tag-div">
             {`Showing all posts by: ${this.state.filteredAuthorName}`}
           </div>
         )}
         {this.state.filteredTagName != null && (
-          <div className="authAndTagDiv">
+          <div className="auth-and-tag-div">
             {`Showing all posts by Key Word: ${this.state.filteredTagName}`}
           </div>
         )}
@@ -57,6 +51,7 @@ export class AllPosts extends Component {
               onFilterByAuthor={this.onFilterByAuthor}
               onFilterByTag={this.onFilterByTag}
               post={post}
+              previewMode={true}
               key={post.id}
             />
           );
