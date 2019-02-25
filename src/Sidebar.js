@@ -11,15 +11,19 @@ export class Sidebar extends Component {
         <div className="sidebar-wrapper">
           <div className="sidebar-quote-container">
             <p className="sidebar-quote">
-              It's a wonderful day in the neighborhood, a wonderful day in the
-              neighborhood...a wonderful day!
+              "It's a wonderful day in the neighborhood, a wonderful day in the
+              neighborhood...a wonderful day!"
             </p>
+            <p className="quote-author">-Author Unknown</p>
           </div>
 
           <div className="sidebar-pics-container">
             <div className="sidebar-pic">
-              <img src={charlottePic} alt="Picture of author" />
-            </div>
+              <img src={charlottePic} alt="Site's author" />
+            </div>{" "}
+            <span className="author-description">
+              Charlotte Warfel-Learning Blog Creator
+            </span>
           </div>
           <div className="sidebar-nav-container">
             <a

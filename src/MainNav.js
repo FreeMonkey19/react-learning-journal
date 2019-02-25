@@ -12,7 +12,7 @@ export class MainNav extends Component {
           </NavLink>
         </span>
         <span className="nav-link-container" title="main-nav-link">
-          <NavLink className="nav-link no-wrap-link" to="/posts">
+          <NavLink className="nav-link" to="/posts">
             All Posts
           </NavLink>
         </span>

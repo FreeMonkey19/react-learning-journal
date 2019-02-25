@@ -31,7 +31,7 @@ export class BlogPost extends Component {
         </h2>
 
         <div className="author-tag-date-created-containers">
-          Published By:
+          <span>Published By:</span>
           <button
             className="author-and-tag-buttons"
             onClick={() => onFilterByAuthor(post.author)}

@@ -3,7 +3,6 @@ import { Header } from "./Header.js";
 import "./App.css";
 import { Route } from "react-router-dom";
 import { Home } from "./Home.js";
-import { AllPosts } from "./AllPosts";
 import { SinglePost } from "./SinglePost.js";
 import { About } from "./About.js";
 import { Contact } from "./Contact.js";
