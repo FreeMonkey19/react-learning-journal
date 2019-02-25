@@ -35,12 +35,12 @@ export class AllPosts extends Component {
     return (
       <div className="AllPosts">
         {this.state.filteredAuthorName != null && (
-          <div className="authAndTagDiv">
+          <div className="auth-and-tag-div">
             {`Showing all posts by: ${this.state.filteredAuthorName}`}
           </div>
         )}
         {this.state.filteredTagName != null && (
-          <div className="authAndTagDiv">
+          <div className="auth-and-tag-div">
             {`Showing all posts by Key Word: ${this.state.filteredTagName}`}
           </div>
         )}

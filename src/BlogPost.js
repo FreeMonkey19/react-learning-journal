@@ -12,7 +12,7 @@ export class BlogPost extends Component {
       const [year, month, day] = datePieces;
       return `Publish Date: ${month} - ${day} - ${year}`;
     }
-    function summaryBody() {
+    function renderBody() {
       if (previewMode === true) {
         return post.body
           .split(" ")
@@ -42,7 +42,7 @@ export class BlogPost extends Component {
 
         <span className="post-created-on">{renderDate(post.createdOn)}</span>
 
-        <div className="post-body">{summaryBody()}</div>
+        <div className="post-body">{renderBody()}</div>
 
         <div className="tags-container">
           <span className="author-tag-date-created-containers">Key Words:</span>
