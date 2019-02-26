@@ -60,7 +60,7 @@ export class NewPost extends Component {
           onChange={e => this.setState({ tags: e.target.value })}
         />
         <br />
-        <button onClick={e => this.handleSubmit(e)} type="submit">
+        <button onClick={this.handleSubmit} type="submit">
           Submit
         </button>
       </form>
