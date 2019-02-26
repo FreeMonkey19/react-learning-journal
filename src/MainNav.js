@@ -28,6 +28,11 @@ export class MainNav extends Component {
             Contact
           </NavLink>
         </span>
+        <span className="nav-link-container" title="main-nav-link">
+          <NavLink className="nav-link" to="/newblog">
+            Blog Form
+          </NavLink>
+        </span>
       </nav>
     );
   }
