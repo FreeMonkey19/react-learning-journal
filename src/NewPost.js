@@ -27,7 +27,7 @@ export class NewPost extends Component {
           name="title"
           placeholder="blog title"
           value={this.state.title}
-          onChange={e => this.handleChange(e)}
+          onChange={this.handleChange}
         />
         <br />
         <input
@@ -35,7 +35,7 @@ export class NewPost extends Component {
           name="author"
           placeholder="author"
           value={this.state.author}
-          onChange={e => this.handleChange(e)}
+          onChange={this.handleChange}
         />
         <br />
         <input
@@ -43,7 +43,7 @@ export class NewPost extends Component {
           name="createdOn"
           placeholder="createdOn"
           value={this.state.createdOn}
-          onChange={e => this.handleChange(e)}
+          onChange={this.handleChange}
         />
         <br />
         <input
@@ -51,7 +51,7 @@ export class NewPost extends Component {
           name="body"
           placeholder="body"
           value={this.state.body}
-          onChange={e => this.handleChange(e)}
+          onChange={this.handleChange}
         />
         <br />
         <input
