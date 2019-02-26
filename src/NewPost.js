@@ -27,7 +27,7 @@ export class NewPost extends Component {
           name="title"
           placeholder="blog title"
           value={this.state.title}
-          onChange={this.handleChange}
+          onChange={e => this.handleChange}
         />
         <br />
         <input
@@ -39,7 +39,6 @@ export class NewPost extends Component {
         />
         <br />
         <input
-          type="date"
           name="createdOn"
           placeholder="createdOn"
           value={this.state.createdOn}
