@@ -17,6 +17,14 @@ export class NewPost extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.state);
+    this.setState({
+      title: "",
+      author: "",
+      createdOn: "",
+      body: "",
+      tags: []
+    });
   };
 
   render() {
@@ -25,9 +33,9 @@ export class NewPost extends Component {
         <input
           type="text"
           name="title"
-          placeholder="blog title"
+          placeholder="title"
           value={this.state.title}
-          onChange={e => this.handleChange}
+          onChange={this.handleChange}
         />
         <br />
         <input
