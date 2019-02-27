@@ -6,7 +6,22 @@ export class NewPost extends Component {
     author: "",
     createdOn: "",
     body: "",
-    tags: []
+    tags: ""
+  };
+
+  convertTagsToArray = tags => {
+    let resultArray = [];
+
+    if (tags != null) {
+      const splitOn = ",";
+
+      resultArray = tags.split(splitOn);
+      resultArray = resultArray.map(function(str) {
+        return str.trim();
+      });
+    }
+
+    return resultArray;
   };
 
   handleChange = e => {
@@ -17,13 +32,21 @@ export class NewPost extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    //manipulate state, to prepare for saving
+    const resultArray = this.convertTagsToArray(this.state.tags);
+    let blogPost = Object.assign({}, this.state);
+    blogPost.tags = resultArray;
+    console.log(blogPost);
+
+    // save blogPost
+
+    //clearing the form
     this.setState({
       title: "",
       author: "",
       createdOn: "",
       body: "",
-      tags: []
+      tags: ""
     });
   };
 
@@ -61,11 +84,13 @@ export class NewPost extends Component {
           onChange={this.handleChange}
         />
         <br />
+        <label>Tags eg: red, green, blue</label>
         <input
           type="text"
+          name="tags"
           placeholder="tags"
           value={this.state.tags}
-          onChange={e => this.setState({ tags: e.target.value })}
+          onChange={this.handleChange}
         />
         <br />
         <button onClick={this.handleSubmit} type="submit">
