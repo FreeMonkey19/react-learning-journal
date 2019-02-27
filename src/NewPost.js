@@ -9,6 +9,15 @@ export class NewPost extends Component {
     tags: ""
   };
 
+  createDateOnSubmit = () => {
+    const date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDate();
+    const dateNow = `${year}-${month}-${day}`;
+    return dateNow;
+  };
+
   convertTagsToArray = tags => {
     let resultArray = [];
 
@@ -32,13 +41,17 @@ export class NewPost extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
     //manipulate state, to prepare for saving
     const resultArray = this.convertTagsToArray(this.state.tags);
     let blogPost = Object.assign({}, this.state);
     blogPost.tags = resultArray;
-    console.log(blogPost);
 
     // save blogPost
+
+    const todaysDate = this.createDateOnSubmit(this.state.createdOn);
+    blogPost.createdOn = todaysDate;
+    console.log(blogPost);
 
     //clearing the form
     this.setState({
@@ -68,14 +81,6 @@ export class NewPost extends Component {
           value={this.state.author}
           onChange={this.handleChange}
         />
-        <br />
-        <input
-          name="createdOn"
-          placeholder="createdOn"
-          value={this.state.createdOn}
-          onChange={this.handleChange}
-        />
-        <br />
         <input
           type="textarea"
           name="body"
@@ -84,7 +89,7 @@ export class NewPost extends Component {
           onChange={this.handleChange}
         />
         <br />
-        <label>Tags eg: red, green, blue</label>
+        <label>Tags ex: red, green, blue</label>
         <input
           type="text"
           name="tags"
