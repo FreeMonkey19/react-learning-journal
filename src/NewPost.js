@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { data } from "./data";
 
 export class NewPost extends Component {
   state = {
+    id: 0,
     title: "",
     author: "",
     createdOn: "",
@@ -16,6 +18,11 @@ export class NewPost extends Component {
     let day = date.getDate();
     const dateNow = `${year}-${month}-${day}`;
     return dateNow;
+  };
+
+  createUniqueIdOnSubmit = () => {
+    const id = data.length;
+    return id;
   };
 
   convertTagsToArray = tags => {
@@ -42,18 +49,18 @@ export class NewPost extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    //manipulate state, to prepare for saving
     const resultArray = this.convertTagsToArray(this.state.tags);
     let blogPost = Object.assign({}, this.state);
     blogPost.tags = resultArray;
 
-    // save blogPost
+    const newId = this.createUniqueIdOnSubmit(this.state.id);
+    blogPost.id = newId;
+    data.push(blogPost);
 
     const todaysDate = this.createDateOnSubmit(this.state.createdOn);
     blogPost.createdOn = todaysDate;
     console.log(blogPost);
 
-    //clearing the form
     this.setState({
       title: "",
       author: "",
