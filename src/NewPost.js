@@ -49,16 +49,17 @@ export class NewPost extends Component {
     e.preventDefault();
 
     const resultArray = this.convertTagsToArray(this.state.tags);
-    let blogPost = Object.assign({}, this.state);
+    const blogPost = Object.assign({}, this.state);
     blogPost.tags = resultArray;
 
     const newId = this.createUniqueIdOnSubmit(this.state.id);
     blogPost.id = newId;
-    data.push(blogPost);
 
     const todaysDate = this.createDateOnSubmit(this.state.createdOn);
     blogPost.createdOn = todaysDate;
     console.log(blogPost);
+
+    data.push(blogPost);
 
     this.setState({
       title: "",
