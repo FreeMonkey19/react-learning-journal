@@ -3,7 +3,6 @@ import { data } from "./data";
 
 export class NewPost extends Component {
   state = {
-    id: 0,
     title: "",
     author: "",
     createdOn: "",
