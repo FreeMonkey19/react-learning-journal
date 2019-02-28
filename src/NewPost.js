@@ -3,6 +3,7 @@ import { data } from "./data";
 
 export class NewPost extends Component {
   state = {
+    id: 0,
     title: "",
     author: "",
     createdOn: "",
@@ -26,15 +27,12 @@ export class NewPost extends Component {
 
   convertTagsToArray = tags => {
     let resultArray = [];
+    const splitOn = ",";
 
-    if (tags != null) {
-      const splitOn = ",";
-
-      resultArray = tags.split(splitOn);
-      resultArray = resultArray.map(function(str) {
-        return str.trim();
-      });
-    }
+    resultArray = tags.split(splitOn);
+    resultArray = resultArray.map(function(str) {
+      return str.trim();
+    });
 
     return resultArray;
   };
@@ -57,9 +55,9 @@ export class NewPost extends Component {
 
     const todaysDate = this.createDateOnSubmit(this.state.createdOn);
     blogPost.createdOn = todaysDate;
-    console.log(blogPost);
 
     data.push(blogPost);
+    console.log(blogPost);
 
     this.setState({
       title: "",
