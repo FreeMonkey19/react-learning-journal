@@ -54,15 +54,6 @@ export class NewPost extends Component {
     blogPost.createdOn = todaysDate;
 
     data.push(blogPost);
-    console.log(blogPost);
-
-    this.setState({
-      title: "",
-      author: "",
-      createdOn: "",
-      body: "",
-      tags: ""
-    });
   };
 
   render() {
@@ -74,13 +65,11 @@ export class NewPost extends Component {
           placeholder="title"
           value={this.state.title}
           onChange={this.handleChange}
-          required
         />
         <br />
         <input
           type="text"
           name="author"
-          required="required"
           value={this.state.author}
           onChange={this.handleChange}
         />
@@ -88,7 +77,6 @@ export class NewPost extends Component {
           type="textarea"
           name="body"
           placeholder="body"
-          required="required"
           value={this.state.body}
           onChange={this.handleChange}
         />
@@ -98,7 +86,6 @@ export class NewPost extends Component {
           type="text"
           name="tags"
           placeholder="tags"
-          required="required"
           value={this.state.tags}
           onChange={this.handleChange}
         />
