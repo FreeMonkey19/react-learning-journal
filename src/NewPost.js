@@ -16,7 +16,7 @@ export class NewPost extends Component {
     let year = date.getFullYear();
     let month = date.getMonth();
     let day = date.getDate();
-    const dateNow = `${year}-${month}-${day}`;
+    const dateNow = `${year}-${month + 1}-${day}`;
     return dateNow;
   };
 
@@ -79,12 +79,13 @@ export class NewPost extends Component {
           placeholder="title"
           value={this.state.title}
           onChange={this.handleChange}
+          required
         />
         <br />
         <input
           type="text"
           name="author"
-          placeholder="author"
+          required="required"
           value={this.state.author}
           onChange={this.handleChange}
         />
@@ -92,6 +93,7 @@ export class NewPost extends Component {
           type="textarea"
           name="body"
           placeholder="body"
+          required="required"
           value={this.state.body}
           onChange={this.handleChange}
         />
@@ -101,10 +103,12 @@ export class NewPost extends Component {
           type="text"
           name="tags"
           placeholder="tags"
+          required="required"
           value={this.state.tags}
           onChange={this.handleChange}
         />
         <br />
+
         <button onClick={this.handleSubmit} type="submit">
           Submit
         </button>
