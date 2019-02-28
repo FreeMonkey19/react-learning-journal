@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { data } from "./data";
 
+function saveBlogPost(blogPost) {
+  return data.push(blogPost);
+}
+
 export class NewPost extends Component {
   state = {
     title: "",
@@ -12,26 +16,21 @@ export class NewPost extends Component {
 
   createDateOnSubmit = () => {
     const date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth();
-    let day = date.getDate();
-    const dateNow = `${year}-${month + 1}-${day}`;
-    return dateNow;
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}-${month}-${day}`;
   };
 
   createUniqueIdOnSubmit = () => {
-    const id = data.length;
-    return id;
+    return data.length;
   };
 
   convertTagsToArray = tags => {
     const splitOn = ",";
-    let resultArray = tags.split(splitOn);
-    resultArray = resultArray.map(function(str) {
+    return tags.split(splitOn).map(function(str) {
       return str.trim();
     });
-
-    return resultArray;
   };
 
   handleChange = e => {
@@ -53,7 +52,7 @@ export class NewPost extends Component {
     const todaysDate = this.createDateOnSubmit(this.state.createdOn);
     blogPost.createdOn = todaysDate;
 
-    data.push(blogPost);
+    saveBlogPost(blogPost);
   };
 
   render() {
@@ -70,6 +69,7 @@ export class NewPost extends Component {
         <input
           type="text"
           name="author"
+          placeholder="author"
           value={this.state.author}
           onChange={this.handleChange}
         />
