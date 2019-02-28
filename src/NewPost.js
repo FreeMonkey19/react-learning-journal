@@ -3,7 +3,6 @@ import { data } from "./data";
 
 export class NewPost extends Component {
   state = {
-    id: 0,
     title: "",
     author: "",
     createdOn: "",
@@ -26,10 +25,8 @@ export class NewPost extends Component {
   };
 
   convertTagsToArray = tags => {
-    let resultArray = [];
     const splitOn = ",";
-
-    resultArray = tags.split(splitOn);
+    let resultArray = tags.split(splitOn);
     resultArray = resultArray.map(function(str) {
       return str.trim();
     });
