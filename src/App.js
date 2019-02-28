@@ -8,6 +8,7 @@ import { About } from "./About.js";
 import { Contact } from "./Contact.js";
 import { BrowserRouter } from "react-router-dom";
 import { AllPostsContainer } from "./AllPostsContainer.js";
+import { NewPost } from "./NewPost.js";
 
 export class App extends Component {
   render() {
@@ -22,6 +23,7 @@ export class App extends Component {
             <Route path="/posts/:id" component={SinglePost} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
+            <Route path="/newblog" component={NewPost} />
           </div>
         </BrowserRouter>
       </div>
