@@ -8,6 +8,7 @@ import { SinglePost } from "./SinglePost.js";
 import { Router, Route } from "react-router";
 import "jest-dom/extend-expect";
 import { createMemoryHistory } from "history";
+import { NewPost } from "./NewPost";
 
 function renderWithRouter(
   ui,
@@ -240,4 +241,15 @@ it("filter by tag", () => {
   fireEvent.click(getByText(postWeWant.tags[0]));
   expect(getByText(postWeWant.tags[0])).toBeInTheDocument();
   expect(queryByText(otherPost.tags[1])).not.toBeInTheDocument();
+});
+
+it("disables submit button when form field is empty", () => {
+  const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
+  const input = queryByLabelText("Title");
+  expect(input).toBeInTheDocument();
+  expect(input.value).toBe("");
+
+  const button = getByText("Submit");
+  expect(button).toBeInTheDocument();
+  expect(button.disabled).toBe(true);
 });

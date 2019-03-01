@@ -53,27 +53,37 @@ export class NewPost extends Component {
     blogPost.createdOn = todaysDate;
 
     saveBlogPost(blogPost);
+    console.log(blogPost);
   };
 
   render() {
+    const { title } = this.state;
+    const isEnabled = title.length > 0;
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
+        <label htmlFor="blog-title">Title</label>
         <input
+          id="blog-title"
           type="text"
           name="title"
           placeholder="title"
           value={this.state.title}
+          required
           onChange={this.handleChange}
         />
         <br />
+        <label htmlFor="author-name">Author</label>
         <input
+          id="author-name"
           type="text"
           name="author"
           placeholder="author"
           value={this.state.author}
           onChange={this.handleChange}
         />
+        <label htmlFor="body-input">Content</label>
         <input
+          id="body-input"
           type="textarea"
           name="body"
           placeholder="body"
@@ -81,8 +91,11 @@ export class NewPost extends Component {
           onChange={this.handleChange}
         />
         <br />
-        <label>Tags ex: red, green, blue</label>
+        <label htmlFor="key-words">
+          Key Words Instructions: separate words by comma
+        </label>
         <input
+          id="key-words"
           type="text"
           name="tags"
           placeholder="tags"
@@ -90,8 +103,14 @@ export class NewPost extends Component {
           onChange={this.handleChange}
         />
         <br />
-
-        <button onClick={this.handleSubmit} type="submit">
+        <label htmlFor="submit-button" />
+        <button
+          id="submit-button"
+          onClick={this.handleSubmit}
+          type="submit"
+          title="submitButton"
+          disabled={!isEnabled}
+        >
           Submit
         </button>
       </form>
