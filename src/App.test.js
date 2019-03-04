@@ -254,7 +254,7 @@ it("disables submit button when form field is empty", () => {
   expect(button.disabled).toBe(true);
 });
 
-it("enables submit button when form field is not empty", () => {
+it("enables submit button when form field has a value", () => {
   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
   const input = queryByLabelText("Title");
   expect(input).toBeInTheDocument();

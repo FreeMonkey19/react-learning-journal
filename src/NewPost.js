@@ -55,9 +55,19 @@ export class NewPost extends Component {
     saveBlogPost(blogPost);
   };
 
-  render() {
+  // function validate(title) {
+  //   return {
+  //     title: title.length === 0,
+  //   };
+  // }
+
+  isValid = () => {
     const { title } = this.state;
-    const isEnabled = title.length > 0;
+    return title.length > 0;
+  };
+
+  render() {
+    // const errors = validate(this.state.title)
     return (
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="blog-title">Title</label>
@@ -110,7 +120,7 @@ export class NewPost extends Component {
           onClick={this.handleSubmit}
           type="submit"
           title="submitButton"
-          disabled={!isEnabled}
+          disabled={!this.isValid()}
         >
           Submit
         </button>
