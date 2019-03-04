@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { App } from "./App";
 import { BlogPost } from "./BlogPost";
-import { render, fireEvent } from "react-testing-library";
+import { render, fireEvent, getByLabelText } from "react-testing-library";
 import { AllPosts } from "./AllPosts";
 import { SinglePost } from "./SinglePost.js";
 import { Router, Route } from "react-router";
@@ -252,4 +252,23 @@ it("disables submit button when form field is empty", () => {
   const button = getByText("Submit");
   expect(button).toBeInTheDocument();
   expect(button.disabled).toBe(true);
+});
+
+it("enables submit button when form field is not empty", () => {
+  const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
+  const input = queryByLabelText("Title");
+  expect(input).toBeInTheDocument();
+  expect(input.value).toBe("");
+
+  const button = getByText("Submit");
+  expect(button).toBeInTheDocument();
+  expect(button.disabled).toBe(true);
+
+  fireEvent.change(input, { target: { value: "a" } });
+  const title = queryByLabelText("Title");
+  expect(title.value).toBe("a");
+  const submitButton = getByText("Submit");
+  expect(title).toBeInTheDocument();
+  expect(submitButton).toBeInTheDocument();
+  expect(submitButton.disabled).toEqual(false);
 });

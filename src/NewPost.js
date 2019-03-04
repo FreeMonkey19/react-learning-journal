@@ -53,7 +53,6 @@ export class NewPost extends Component {
     blogPost.createdOn = todaysDate;
 
     saveBlogPost(blogPost);
-    console.log(blogPost);
   };
 
   render() {
@@ -79,6 +78,7 @@ export class NewPost extends Component {
           name="author"
           placeholder="author"
           value={this.state.author}
+          required
           onChange={this.handleChange}
         />
         <label htmlFor="body-input">Content</label>
@@ -88,6 +88,7 @@ export class NewPost extends Component {
           name="body"
           placeholder="body"
           value={this.state.body}
+          required
           onChange={this.handleChange}
         />
         <br />
