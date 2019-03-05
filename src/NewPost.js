@@ -58,13 +58,12 @@ export class NewPost extends Component {
   };
 
   validate = () => {
-    console.log(this.isTitleValid());
-    console.log(this.isAuthorValid());
-    console.log(this.isBodyValid());
+    // console.log(this.isTitleValid());
+
     return {
-      title: this.isTitleValid(),
-      author: this.isAuthorValid(),
-      body: this.isBodyValid()
+      title: !this.isTitleValid(),
+      author: !this.isAuthorValid(),
+      body: !this.isBodyValid()
     };
   };
 
@@ -78,6 +77,7 @@ export class NewPost extends Component {
 
   render() {
     const errors = this.validate();
+    console.log(errors);
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -92,7 +92,7 @@ export class NewPost extends Component {
           required
           onChange={this.handleChange}
         />
-
+        {errors.title && <div className="errorDiv">Title is required!</div>}
         <br />
         <label htmlFor="author-name">Author</label>
         <input
@@ -105,6 +105,10 @@ export class NewPost extends Component {
           required
           onChange={this.handleChange}
         />
+        {errors.author && (
+          <div className="errorDiv">Author name is required!</div>
+        )}
+
         <label htmlFor="body-input">Content</label>
         <textarea
           id="body-input"
@@ -116,6 +120,7 @@ export class NewPost extends Component {
           required
           onChange={this.handleChange}
         />
+        {errors.body && <div className="errorDiv">Content is required!</div>}
         <br />
         <label htmlFor="key-words">
           Key Words Instructions: separate words by comma
