@@ -8,11 +8,20 @@ function saveBlogPost(blogPost) {
 
 export class NewPost extends Component {
   state = {
-    title: "",
-    author: "",
-    createdOn: "",
-    body: "",
-    tags: ""
+    values: {
+      title: "",
+      author: "",
+      createdOn: "",
+      body: "",
+      tags: ""
+    },
+    touched: {
+      title: false,
+      author: false,
+      createdOn: false,
+      body: false,
+      tags: false
+    }
   };
 
   createDateOnSubmit = () => {
@@ -36,21 +45,24 @@ export class NewPost extends Component {
 
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      values: {
+        ...this.state.values,
+        [e.target.name]: e.target.value
+      }
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
 
-    const resultArray = this.convertTagsToArray(this.state.tags);
-    const blogPost = Object.assign({}, this.state);
+    const resultArray = this.convertTagsToArray(this.state.values.tags);
+    const blogPost = Object.assign({}, this.state.values);
     blogPost.tags = resultArray;
 
-    const newId = this.createUniqueIdOnSubmit(this.state.id);
+    const newId = this.createUniqueIdOnSubmit(this.state.values.id);
     blogPost.id = newId;
 
-    const todaysDate = this.createDateOnSubmit(this.state.createdOn);
+    const todaysDate = this.createDateOnSubmit(this.state.values.createdOn);
     blogPost.createdOn = todaysDate;
 
     saveBlogPost(blogPost);
@@ -69,11 +81,12 @@ export class NewPost extends Component {
     return this.isTitleValid() && this.isAuthorValid() && this.isBodyValid();
   };
 
-  isTitleValid = () => this.state.title.length > 0;
-  isAuthorValid = () => this.state.author.length > 0;
-  isBodyValid = () => this.state.body.length > 0;
+  isTitleValid = () => this.state.values.title.length > 0;
+  isAuthorValid = () => this.state.values.author.length > 0;
+  isBodyValid = () => this.state.values.body.length > 0;
 
   render() {
+    console.log(this.state.values);
     const errors = this.validate();
 
     return (
@@ -84,12 +97,12 @@ export class NewPost extends Component {
           type="text"
           name="title"
           placeholder="title"
-          className={errors.title ? "error" : ""}
-          value={this.state.title}
+          // className={errors.title ? "error" : ""}
+          value={this.state.values.title}
           required
           onChange={this.handleChange}
         />
-        {errors.title && <div className="errorMsgDiv">Title is required!</div>}
+        {/* {errors.title && <div className="errorMsgDiv">Title is required!</div>} */}
         <br />
         <label htmlFor="author-name">Author</label>
         <input
@@ -97,14 +110,14 @@ export class NewPost extends Component {
           type="text"
           name="author"
           placeholder="author"
-          className={errors.author ? "error" : ""}
-          value={this.state.author}
+          // className={errors.author ? "error" : ""}
+          value={this.state.values.author}
           required
           onChange={this.handleChange}
         />
-        {errors.author && (
+        {/* {errors.author && (
           <div className="errorMsgDiv">Author name is required!</div>
-        )}
+        )} */}
 
         <label htmlFor="body-input">Content</label>
         <textarea
@@ -112,12 +125,12 @@ export class NewPost extends Component {
           type="textarea"
           name="body"
           placeholder="body"
-          className={errors.body ? "error" : ""}
-          value={this.state.body}
+          // className={errors.body ? "error" : ""}
+          value={this.state.values.body}
           required
           onChange={this.handleChange}
         />
-        {errors.body && <div className="errorMsgDiv">Content is required!</div>}
+        {/* {errors.body && <div className="errorMsgDiv">Content is required!</div>} */}
         <br />
         <label htmlFor="key-words">
           Key Words Instructions: separate words by comma
@@ -127,7 +140,7 @@ export class NewPost extends Component {
           type="text"
           name="tags"
           placeholder="ex: moon, stars, purple"
-          value={this.state.tags}
+          value={this.state.values.tags}
           onChange={this.handleChange}
         />
         <br />
@@ -138,7 +151,7 @@ export class NewPost extends Component {
           type="submit"
           title="submitButton"
           className="submit"
-          disabled={!this.isValid()}
+          // disabled={!this.isValid()}
         >
           Submit
         </button>

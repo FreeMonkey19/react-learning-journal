@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { App } from "./App";
 import { BlogPost } from "./BlogPost";
-import { render, fireEvent, getByLabelText } from "react-testing-library";
+import { render, fireEvent } from "react-testing-library";
 import { AllPosts } from "./AllPosts";
 import { SinglePost } from "./SinglePost.js";
 import { Router, Route } from "react-router";
