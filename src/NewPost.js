@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { data } from "./data";
+import "./NewPost.css";
 
 function saveBlogPost(blogPost) {
   return data.push(blogPost);
@@ -53,21 +54,28 @@ export class NewPost extends Component {
     blogPost.createdOn = todaysDate;
 
     saveBlogPost(blogPost);
+    console.log(blogPost);
   };
 
-  // function validate(title) {
-  //   return {
-  //     title: title.length === 0,
-  //   };
-  // }
+  validate = () => {
+    return {
+      title: !this.isTitleValid(),
+      author: !this.isAuthorValid(),
+      body: !this.isBodyValid()
+    };
+  };
 
   isValid = () => {
-    const { title } = this.state;
-    return title.length > 0;
+    return this.isTitleValid() && this.isAuthorValid() && this.isBodyValid();
   };
 
+  isTitleValid = () => this.state.title.length > 0;
+  isAuthorValid = () => this.state.author.length > 0;
+  isBodyValid = () => this.state.body.length > 0;
+
   render() {
-    // const errors = validate(this.state.title)
+    const errors = this.validate();
+
     return (
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="blog-title">Title</label>
@@ -76,10 +84,12 @@ export class NewPost extends Component {
           type="text"
           name="title"
           placeholder="title"
+          className={errors.title ? "error" : ""}
           value={this.state.title}
           required
           onChange={this.handleChange}
         />
+
         <br />
         <label htmlFor="author-name">Author</label>
         <input
@@ -87,16 +97,18 @@ export class NewPost extends Component {
           type="text"
           name="author"
           placeholder="author"
+          className={errors.author ? "error" : ""}
           value={this.state.author}
           required
           onChange={this.handleChange}
         />
         <label htmlFor="body-input">Content</label>
-        <input
+        <textarea
           id="body-input"
           type="textarea"
           name="body"
           placeholder="body"
+          className={errors.body ? "error" : ""}
           value={this.state.body}
           required
           onChange={this.handleChange}
@@ -109,7 +121,7 @@ export class NewPost extends Component {
           id="key-words"
           type="text"
           name="tags"
-          placeholder="tags"
+          placeholder="ex: moon, stars, purple"
           value={this.state.tags}
           onChange={this.handleChange}
         />
@@ -120,6 +132,7 @@ export class NewPost extends Component {
           onClick={this.handleSubmit}
           type="submit"
           title="submitButton"
+          className="submit"
           disabled={!this.isValid()}
         >
           Submit
