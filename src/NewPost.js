@@ -58,10 +58,13 @@ export class NewPost extends Component {
   };
 
   validate = () => {
+    console.log(this.isTitleValid());
+    console.log(this.isAuthorValid());
+    console.log(this.isBodyValid());
     return {
-      title: !this.isTitleValid(),
-      author: !this.isAuthorValid(),
-      body: !this.isBodyValid()
+      title: this.isTitleValid(),
+      author: this.isAuthorValid(),
+      body: this.isBodyValid()
     };
   };
 

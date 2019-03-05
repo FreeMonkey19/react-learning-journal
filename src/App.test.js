@@ -257,7 +257,6 @@ it("disables submit button when title field is empty", () => {
   fireEvent.change(title, { target: { value: "a" } });
   expect(title.value).toBe("a");
   expect(title).not.toHaveClass("error");
-  // expect(button.disabled).toBe(false);
 });
 it("disables submit button when author field is empty", () => {
   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
@@ -273,7 +272,6 @@ it("disables submit button when author field is empty", () => {
   fireEvent.change(author, { target: { value: "a" } });
   expect(author.value).toBe("a");
   expect(author).not.toHaveClass("error");
-  // expect(button.disabled).toBe(false);
 });
 
 it("disables submit button when body field is empty", () => {
@@ -290,42 +288,22 @@ it("disables submit button when body field is empty", () => {
   fireEvent.change(body, { target: { value: "a" } });
   expect(body.value).toBe("a");
   expect(body).not.toHaveClass("error");
-
-  // expect(button.disabled).toBe(false);
 });
 
-it("enables submit button when all form fields have a value", () => {
+it.only("enables submit button when all form fields have a value", () => {
   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
   const title = queryByLabelText("Title");
-  expect(title).toBeInTheDocument();
-  expect(title.value).toBe("");
-  expect(title).toHaveClass("error");
-
   const author = queryByLabelText("Author");
-  expect(author).toBeInTheDocument();
-  expect(author.value).toBe("");
-  expect(author).toHaveClass("error");
-
   const body = queryByLabelText("Content");
-  expect(body).toBeInTheDocument();
-  expect(body.value).toBe("");
-  expect(body).toHaveClass("error");
 
   const button = getByText("Submit");
   expect(button).toBeInTheDocument();
   expect(button.disabled).toBe(true);
 
   fireEvent.change(title, { target: { value: "a" } });
-  expect(title.value).toBe("a");
-  expect(title).not.toHaveClass("error");
 
   fireEvent.change(author, { target: { value: "a" } });
-  expect(author.value).toBe("a");
-  expect(author).not.toHaveClass("error");
 
   fireEvent.change(body, { target: { value: "a" } });
-  expect(body.value).toBe("a");
-  expect(body).not.toHaveClass("error");
-
-  // expect(button.disable).toBe(false);
+  expect(button.disabled).toBe(false);
 });
