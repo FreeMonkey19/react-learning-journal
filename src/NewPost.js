@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { data } from "./data";
+import "./NewPost.css";
 
 function saveBlogPost(blogPost) {
   return data.push(blogPost);
@@ -53,45 +54,92 @@ export class NewPost extends Component {
     blogPost.createdOn = todaysDate;
 
     saveBlogPost(blogPost);
+    console.log(blogPost);
   };
 
+  validate = () => {
+    return {
+      title: !this.isTitleValid(),
+      author: !this.isAuthorValid(),
+      body: !this.isBodyValid()
+    };
+  };
+
+  isValid = () => {
+    return this.isTitleValid() && this.isAuthorValid() && this.isBodyValid();
+  };
+
+  isTitleValid = () => this.state.title.length > 0;
+  isAuthorValid = () => this.state.author.length > 0;
+  isBodyValid = () => this.state.body.length > 0;
+
   render() {
+    const errors = this.validate();
+
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
+        <label htmlFor="blog-title">Title</label>
         <input
+          id="blog-title"
           type="text"
           name="title"
           placeholder="title"
+          className={errors.title ? "error" : ""}
           value={this.state.title}
+          required
           onChange={this.handleChange}
         />
+        {errors.title && <div className="errorMsgDiv">Title is required!</div>}
         <br />
+        <label htmlFor="author-name">Author</label>
         <input
+          id="author-name"
           type="text"
           name="author"
           placeholder="author"
+          className={errors.author ? "error" : ""}
           value={this.state.author}
+          required
           onChange={this.handleChange}
         />
-        <input
+        {errors.author && (
+          <div className="errorMsgDiv">Author name is required!</div>
+        )}
+
+        <label htmlFor="body-input">Content</label>
+        <textarea
+          id="body-input"
           type="textarea"
           name="body"
           placeholder="body"
+          className={errors.body ? "error" : ""}
           value={this.state.body}
+          required
           onChange={this.handleChange}
         />
+        {errors.body && <div className="errorMsgDiv">Content is required!</div>}
         <br />
-        <label>Tags ex: red, green, blue</label>
+        <label htmlFor="key-words">
+          Key Words Instructions: separate words by comma
+        </label>
         <input
+          id="key-words"
           type="text"
           name="tags"
-          placeholder="tags"
+          placeholder="ex: moon, stars, purple"
           value={this.state.tags}
           onChange={this.handleChange}
         />
         <br />
-
-        <button onClick={this.handleSubmit} type="submit">
+        <label htmlFor="submit-button" />
+        <button
+          id="submit-button"
+          onClick={this.handleSubmit}
+          type="submit"
+          title="submitButton"
+          className="submit"
+          disabled={!this.isValid()}
+        >
           Submit
         </button>
       </form>

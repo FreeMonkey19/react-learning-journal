@@ -1,0 +1,29 @@
+.error {
+  border: 2px solid red;
+}
+
+.submit {
+  padding: 5px;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-weight: bold;
+}
+label {
+  display: block;
+  margin-top: 5px;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+input {
+  margin: 5px;
+}
+
+textarea {
+  margin: 5px;
+}
+
+.errorMsgDiv {
+  margin-left: 5px;
+  color: red;
+}
