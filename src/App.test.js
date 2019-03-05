@@ -72,7 +72,9 @@ it("renders a post", () => {
 
   const authorRegex = new RegExp(post.author);
 
-  const { getByText } = renderWithRouter(<BlogPost post={post} />);
+  const { getByText } = renderWithRouter(
+    <BlogPost post={post} previewMode={false} />
+  );
   expect(getByText(post.title)).toBeInTheDocument();
   expect(getByText(post.title)).toHaveClass("post-title");
 
@@ -290,7 +292,7 @@ it("disables submit button when body field is empty", () => {
   expect(body).not.toHaveClass("error");
 });
 
-it.only("enables submit button when all form fields have a value", () => {
+it("enables submit button when all form fields have a value", () => {
   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
   const title = queryByLabelText("Title");
   const author = queryByLabelText("Author");
