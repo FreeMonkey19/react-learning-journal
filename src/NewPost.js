@@ -97,7 +97,6 @@ export class NewPost extends Component {
   };
 
   isTitleValid = () =>
-    // has not been touched OR length has a value of at least 1
     !this.state.touched.title || this.state.values.title.length > 0;
   isAuthorValid = () =>
     !this.state.touched.author || this.state.values.author.length > 0;
@@ -105,8 +104,6 @@ export class NewPost extends Component {
     !this.state.touched.body || this.state.values.body.length > 0;
 
   render() {
-    // console.log(this.state.values);
-    console.log(this.state.touched);
     const errors = this.validate();
 
     return (
