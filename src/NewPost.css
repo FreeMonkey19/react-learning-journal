@@ -1,3 +1,11 @@
+.newBlogForm {
+  text-align: center;
+}
+
+.form-header {
+  text-align: center;
+}
+
 .error {
   border: 2px solid red;
 }
@@ -17,10 +25,14 @@ label {
 
 input {
   margin: 5px;
+  font-size: 16px;
 }
 
 textarea {
   margin: 5px;
+  font-size: 16px;
+  max-width: 300px;
+  max-height: 150px;
 }
 
 .errorMsgDiv {
