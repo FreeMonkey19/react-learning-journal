@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { data } from "./data";
 import "./NewPost.css";
-
-function saveBlogPost(blogPost) {
-  return data.push(blogPost);
-}
+import saveBlogPost from "./lib/saveBlogPost";
 
 export class NewPost extends Component {
   state = {
@@ -21,7 +18,8 @@ export class NewPost extends Component {
       createdOn: false,
       body: false,
       tags: false
-    }
+    },
+    submitted: false
   };
 
   createDateOnSubmit = () => {
@@ -63,45 +61,43 @@ export class NewPost extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({
+      submitted: true
+    });
 
-    const resultArray = this.convertTagsToArray(this.state.values.tags);
-    const blogPost = Object.assign({}, this.state.values);
-    blogPost.tags = resultArray;
+    if (this.isTitleValid() && this.isAuthorValid() && this.isBodyValid()) {
+      const resultArray = this.convertTagsToArray(this.state.values.tags);
+      const blogPost = Object.assign({}, this.state.values);
+      blogPost.tags = resultArray;
 
-    const newId = this.createUniqueIdOnSubmit(this.state.values.id);
-    blogPost.id = newId;
+      const newId = this.createUniqueIdOnSubmit(this.state.values.id);
+      blogPost.id = newId;
 
-    const todaysDate = this.createDateOnSubmit(this.state.values.createdOn);
-    blogPost.createdOn = todaysDate;
+      const todaysDate = this.createDateOnSubmit(this.state.values.createdOn);
+      blogPost.createdOn = todaysDate;
 
-    saveBlogPost(blogPost);
+      saveBlogPost(blogPost);
+      console.log(blogPost);
+    }
   };
 
   validate = () => {
     return {
-      title: !this.isTitleValid(),
-      author: !this.isAuthorValid(),
-      body: !this.isBodyValid()
+      title:
+        (!this.isTitleValid() && this.state.touched.title) ||
+        (this.state.submitted && !this.isTitleValid()),
+      author:
+        (!this.isAuthorValid() && this.state.touched.author) ||
+        (this.state.submitted && !this.isAuthorValid()),
+      body:
+        (!this.isBodyValid() && this.state.touched.body) ||
+        (this.state.submitted && !this.isBodyValid())
     };
   };
 
-  shouldEnableSubmit = () => {
-    return (
-      this.isTitleValid() &&
-      this.isAuthorValid() &&
-      this.isBodyValid() &&
-      this.state.touched.title &&
-      this.state.touched.author &&
-      this.state.touched.body
-    );
-  };
-
-  isTitleValid = () =>
-    !this.state.touched.title || this.state.values.title.length > 0;
-  isAuthorValid = () =>
-    !this.state.touched.author || this.state.values.author.length > 0;
-  isBodyValid = () =>
-    !this.state.touched.body || this.state.values.body.length > 0;
+  isTitleValid = () => this.state.values.title.length > 0;
+  isAuthorValid = () => this.state.values.author.length > 0;
+  isBodyValid = () => this.state.values.body.length > 0;
 
   render() {
     const errors = this.validate();
@@ -158,11 +154,7 @@ export class NewPost extends Component {
             <div className="errorMsgDiv">Content is required!</div>
           )}
           <br />
-          <label htmlFor="key-words">
-            Key Words Instructions:
-            <br />
-            Separate words by comma
-          </label>
+          <label htmlFor="key-words">Key Words Instructions:</label>
           <input
             id="key-words"
             type="text"
@@ -179,7 +171,6 @@ export class NewPost extends Component {
             type="submit"
             title="submitButton"
             className="submit"
-            disabled={!this.shouldEnableSubmit()}
           >
             Submit
           </button>

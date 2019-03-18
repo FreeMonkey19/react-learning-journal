@@ -9,6 +9,9 @@ import { Router, Route } from "react-router";
 import "jest-dom/extend-expect";
 import { createMemoryHistory } from "history";
 import { NewPost } from "./NewPost";
+import saveBlogPost from "./lib/saveBlogPost";
+
+jest.mock("./lib/saveBlogPost");
 
 function renderWithRouter(
   ui,
@@ -245,67 +248,137 @@ it("filter by tag", () => {
   expect(queryByText(otherPost.tags[1])).not.toBeInTheDocument();
 });
 
-it("disables submit button when title field is empty", () => {
+it("allows submission of form when form fields have a value", () => {
   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
   const title = queryByLabelText("Title");
   expect(title).toBeInTheDocument();
   expect(title.value).toBe("");
-  expect(title).toHaveClass("error");
 
-  const button = getByText("Submit");
-  expect(button).toBeInTheDocument();
-  expect(button.disabled).toBe(true);
-
-  fireEvent.change(title, { target: { value: "a" } });
-  expect(title.value).toBe("a");
-  expect(title).not.toHaveClass("error");
-});
-it("disables submit button when author field is empty", () => {
-  const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
   const author = queryByLabelText("Author");
   expect(author).toBeInTheDocument();
   expect(author.value).toBe("");
-  expect(author).toHaveClass("error");
 
-  const button = getByText("Submit");
-  expect(button).toBeInTheDocument();
-  expect(button.disabled).toBe(true);
-
-  fireEvent.change(author, { target: { value: "a" } });
-  expect(author.value).toBe("a");
-  expect(author).not.toHaveClass("error");
-});
-
-it("disables submit button when body field is empty", () => {
-  const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
   const body = queryByLabelText("Content");
   expect(body).toBeInTheDocument();
   expect(body.value).toBe("");
-  expect(body).toHaveClass("error");
 
   const button = getByText("Submit");
   expect(button).toBeInTheDocument();
-  expect(button.disabled).toBe(true);
+
+  fireEvent.change(title, { target: { value: "a" } });
+  expect(title.value).toBe("a");
+
+  fireEvent.change(author, { target: { value: "a" } });
+  expect(author.value).toBe("a");
 
   fireEvent.change(body, { target: { value: "a" } });
   expect(body.value).toBe("a");
-  expect(body).not.toHaveClass("error");
+
+  fireEvent.click(button);
+  expect(saveBlogPost).toHaveBeenCalledWith(
+    expect.objectContaining({
+      title: "a",
+      author: "a",
+      body: "a"
+    })
+  );
 });
 
-it("enables submit button when all form fields have a value", () => {
-  const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
-  const title = queryByLabelText("Title");
-  const author = queryByLabelText("Author");
-  const body = queryByLabelText("Content");
+// it("allows submission of form when tags field has a value"),
+//   () => {
+//     const tagsString = new RegExp("Key Words Instructions:");
+//     expect(queryByLabelText(tagsString)).toBeInTheDocument();
 
-  const button = getByText("Submit");
-  expect(button).toBeInTheDocument();
-  expect(button.disabled).toBe(true);
+//     const button = getByText("Submit");
+//     expect(button).toBeInTheDocument();
 
-  fireEvent.change(title, { target: { value: "a" } });
+//     fireEvent.change(tags, { target: { value: "a" } });
+//     expect(tags.value).toBe("");
+//   };
 
-  fireEvent.change(author, { target: { value: "a" } });
+// it("handle submit prevents submission of form when title, author, body and tags fields are empty and shows errors in title, author and body fields", () => {
+//   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
+//   const title = queryByLabelText("Title");
 
-  fireEvent.change(body, { target: { value: "a" } });
-  expect(button.disabled).toBe(false);
-});
+//   expect(title).toHaveClass("error");
+
+//   const author = queryByLabelText("Author");
+
+//   expect(author).toHaveClass("error");
+
+//   const body = queryByLabelText("Content");
+
+//   expect(body).toHaveClass("error");
+
+//   const tags = queryByLabelText("Key Words Instructions:");
+
+//   expect(tags).not.toHaveClass("error");
+
+//   const button = getByText("Submit");
+//   expect(button).toBeInTheDocument();
+// });
+
+// it("disables submit button when title field is empty", () => {
+//   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
+//   const title = queryByLabelText("Title");
+//   expect(title).toBeInTheDocument();
+//   expect(title.value).toBe("");
+//   expect(title).toHaveClass("error");
+
+//   const button = getByText("Submit");
+//   expect(button).toBeInTheDocument();
+//   expect(button.disabled).toBe(true);
+
+//   fireEvent.change(title, { target: { value: "a" } });
+//   expect(title.value).toBe("a");
+//   expect(title).not.toHaveClass("error");
+// });
+// it("disables submit button when author field is empty", () => {
+//   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
+//   const author = queryByLabelText("Author");
+//   expect(author).toBeInTheDocument();
+//   expect(author.value).toBe("");
+//   expect(author).toHaveClass("error");
+
+//   const button = getByText("Submit");
+//   expect(button).toBeInTheDocument();
+//   expect(button.disabled).toBe(true);
+
+//   fireEvent.change(author, { target: { value: "a" } });
+//   expect(author.value).toBe("a");
+//   expect(author).not.toHaveClass("error");
+// });
+
+// it("disables submit button when body field is empty", () => {
+//   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
+//   const body = queryByLabelText("Content");
+//   expect(body).toBeInTheDocument();
+//   expect(body.value).toBe("");
+//   expect(body).toHaveClass("error");
+
+//   const button = getByText("Submit");
+//   expect(button).toBeInTheDocument();
+//   expect(button.disabled).toBe(true);
+
+//   fireEvent.change(body, { target: { value: "a" } });
+//   expect(body.value).toBe("a");
+//   expect(body).not.toHaveClass("error");
+// });
+
+// it("enables submit button when all form fields have a value", () => {
+//   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
+//   const title = queryByLabelText("Title");
+//   const author = queryByLabelText("Author");
+//   const body = queryByLabelText("Content");
+
+//   const button = getByText("Submit");
+//   expect(button).toBeInTheDocument();
+//   expect(button.disabled).toBe(false);
+
+//   fireEvent.change(title, { target: { value: "a" } });
+
+//   fireEvent.change(author, { target: { value: "a" } });
+
+//   fireEvent.change(body, { target: { value: "a" } });
+//   expect(button.disabled).toBe(false);
+// });
