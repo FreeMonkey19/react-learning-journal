@@ -77,7 +77,6 @@ export class NewPost extends Component {
       blogPost.createdOn = todaysDate;
 
       saveBlogPost(blogPost);
-      console.log(blogPost);
     }
   };
 
@@ -154,7 +153,7 @@ export class NewPost extends Component {
             <div className="errorMsgDiv">Content is required!</div>
           )}
           <br />
-          <label htmlFor="key-words">Key Words Instructions:</label>
+          <label htmlFor="key-words">Key Words:</label>
           <input
             id="key-words"
             type="text"

@@ -248,7 +248,7 @@ it("filter by tag", () => {
   expect(queryByText(otherPost.tags[1])).not.toBeInTheDocument();
 });
 
-it("allows submission of form when form fields have a value", () => {
+it("allows submission of form when required form fields have a value", () => {
   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
   const title = queryByLabelText("Title");
   expect(title).toBeInTheDocument();
@@ -284,101 +284,71 @@ it("allows submission of form when form fields have a value", () => {
   );
 });
 
-// it("allows submission of form when tags field has a value"),
-//   () => {
-//     const tagsString = new RegExp("Key Words Instructions:");
-//     expect(queryByLabelText(tagsString)).toBeInTheDocument();
+it("allows submission of form when tags field has a value", () => {
+  const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
+  const title = queryByLabelText("Title");
+  const author = queryByLabelText("Author");
+  const body = queryByLabelText("Content");
 
-//     const button = getByText("Submit");
-//     expect(button).toBeInTheDocument();
+  const tags = queryByLabelText("Key Words:");
+  expect(tags).toBeInTheDocument();
+  expect(tags.value).toBe("");
 
-//     fireEvent.change(tags, { target: { value: "a" } });
-//     expect(tags.value).toBe("");
-//   };
+  const button = getByText("Submit");
+  expect(button).toBeInTheDocument();
 
-// it("handle submit prevents submission of form when title, author, body and tags fields are empty and shows errors in title, author and body fields", () => {
-//   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
-//   const title = queryByLabelText("Title");
+  fireEvent.change(title, { target: { value: "a" } });
+  expect(title.value).toBe("a");
 
-//   expect(title).toHaveClass("error");
+  fireEvent.change(author, { target: { value: "a" } });
+  expect(author.value).toBe("a");
 
-//   const author = queryByLabelText("Author");
+  fireEvent.change(body, { target: { value: "a" } });
+  expect(body.value).toBe("a");
 
-//   expect(author).toHaveClass("error");
+  fireEvent.change(tags, { target: { value: "a" } });
+  expect(tags.value).toBe("a");
 
-//   const body = queryByLabelText("Content");
+  fireEvent.click(button);
+  expect(saveBlogPost).toHaveBeenCalledWith(
+    expect.objectContaining({
+      title: "a",
+      author: "a",
+      body: "a",
+      tags: ["a"]
+    })
+  );
+});
 
-//   expect(body).toHaveClass("error");
+it("prevents submission of form and shows errors when required form fields are empty", () => {
+  const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
+  const title = queryByLabelText("Title");
+  expect(title.value).toBe("");
 
-//   const tags = queryByLabelText("Key Words Instructions:");
+  const author = queryByLabelText("Author");
+  expect(author.value).toBe("");
 
-//   expect(tags).not.toHaveClass("error");
+  const body = queryByLabelText("Content");
+  expect(body.value).toBe("");
 
-//   const button = getByText("Submit");
-//   expect(button).toBeInTheDocument();
-// });
+  const tags = queryByLabelText("Key Words:");
+  expect(tags.value).toBe("");
 
-// it("disables submit button when title field is empty", () => {
-//   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
-//   const title = queryByLabelText("Title");
-//   expect(title).toBeInTheDocument();
-//   expect(title.value).toBe("");
-//   expect(title).toHaveClass("error");
+  const button = getByText("Submit");
+  expect(button).toBeInTheDocument();
 
-//   const button = getByText("Submit");
-//   expect(button).toBeInTheDocument();
-//   expect(button.disabled).toBe(true);
+  fireEvent.click(button);
+  expect(title).toHaveClass("error");
+  expect(author).toHaveClass("error");
+  expect(body).toHaveClass("error");
+  expect(tags).not.toHaveClass("error");
 
-//   fireEvent.change(title, { target: { value: "a" } });
-//   expect(title.value).toBe("a");
-//   expect(title).not.toHaveClass("error");
-// });
-// it("disables submit button when author field is empty", () => {
-//   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
-//   const author = queryByLabelText("Author");
-//   expect(author).toBeInTheDocument();
-//   expect(author.value).toBe("");
-//   expect(author).toHaveClass("error");
-
-//   const button = getByText("Submit");
-//   expect(button).toBeInTheDocument();
-//   expect(button.disabled).toBe(true);
-
-//   fireEvent.change(author, { target: { value: "a" } });
-//   expect(author.value).toBe("a");
-//   expect(author).not.toHaveClass("error");
-// });
-
-// it("disables submit button when body field is empty", () => {
-//   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
-//   const body = queryByLabelText("Content");
-//   expect(body).toBeInTheDocument();
-//   expect(body.value).toBe("");
-//   expect(body).toHaveClass("error");
-
-//   const button = getByText("Submit");
-//   expect(button).toBeInTheDocument();
-//   expect(button.disabled).toBe(true);
-
-//   fireEvent.change(body, { target: { value: "a" } });
-//   expect(body.value).toBe("a");
-//   expect(body).not.toHaveClass("error");
-// });
-
-// it("enables submit button when all form fields have a value", () => {
-//   const { queryByLabelText, getByText } = renderWithRouter(<NewPost />);
-//   const title = queryByLabelText("Title");
-//   const author = queryByLabelText("Author");
-//   const body = queryByLabelText("Content");
-
-//   const button = getByText("Submit");
-//   expect(button).toBeInTheDocument();
-//   expect(button.disabled).toBe(false);
-
-//   fireEvent.change(title, { target: { value: "a" } });
-
-//   fireEvent.change(author, { target: { value: "a" } });
-
-//   fireEvent.change(body, { target: { value: "a" } });
-//   expect(button.disabled).toBe(false);
-// });
+  expect(saveBlogPost).not.toHaveBeenCalledWith(
+    expect.objectContaining({
+      title: "",
+      author: "",
+      body: "",
+      tags: [""]
+    })
+  );
+});
