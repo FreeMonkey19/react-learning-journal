@@ -11,9 +11,9 @@ export class Header extends Component {
             <h1 className="title">A Seattle Coder's Learning Blog</h1>
           </div>
           <div className="page-subtitle">
-            <h3 className="header-subtitle">
+            <h2 className="header-subtitle">
               A Woman in Tech, Breaking Stereotypes and Broadening Inclusion.
-            </h3>
+            </h2>
           </div>
         </div>
         <MainNav />

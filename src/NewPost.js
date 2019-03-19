@@ -1,18 +1,25 @@
 import React, { Component } from "react";
 import { data } from "./data";
 import "./NewPost.css";
-
-function saveBlogPost(blogPost) {
-  return data.push(blogPost);
-}
+import saveBlogPost from "./lib/saveBlogPost";
 
 export class NewPost extends Component {
   state = {
-    title: "",
-    author: "",
-    createdOn: "",
-    body: "",
-    tags: ""
+    values: {
+      title: "",
+      author: "",
+      createdOn: "",
+      body: "",
+      tags: ""
+    },
+    touched: {
+      title: false,
+      author: false,
+      createdOn: false,
+      body: false,
+      tags: false
+    },
+    submitted: false
   };
 
   createDateOnSubmit = () => {
@@ -36,113 +43,138 @@ export class NewPost extends Component {
 
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      values: {
+        ...this.state.values,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
+  handleBlur = e => {
+    this.setState({
+      touched: {
+        ...this.state.touched,
+        [e.target.name]: true
+      }
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({
+      submitted: true
+    });
 
-    const resultArray = this.convertTagsToArray(this.state.tags);
-    const blogPost = Object.assign({}, this.state);
-    blogPost.tags = resultArray;
+    if (this.isTitleValid() && this.isAuthorValid() && this.isBodyValid()) {
+      const resultArray = this.convertTagsToArray(this.state.values.tags);
+      const blogPost = Object.assign({}, this.state.values);
+      blogPost.tags = resultArray;
 
-    const newId = this.createUniqueIdOnSubmit(this.state.id);
-    blogPost.id = newId;
+      const newId = this.createUniqueIdOnSubmit(this.state.values.id);
+      blogPost.id = newId;
 
-    const todaysDate = this.createDateOnSubmit(this.state.createdOn);
-    blogPost.createdOn = todaysDate;
+      const todaysDate = this.createDateOnSubmit(this.state.values.createdOn);
+      blogPost.createdOn = todaysDate;
 
-    saveBlogPost(blogPost);
-    console.log(blogPost);
+      saveBlogPost(blogPost);
+    }
   };
 
   validate = () => {
     return {
-      title: !this.isTitleValid(),
-      author: !this.isAuthorValid(),
-      body: !this.isBodyValid()
+      title:
+        (!this.isTitleValid() && this.state.touched.title) ||
+        (this.state.submitted && !this.isTitleValid()),
+      author:
+        (!this.isAuthorValid() && this.state.touched.author) ||
+        (this.state.submitted && !this.isAuthorValid()),
+      body:
+        (!this.isBodyValid() && this.state.touched.body) ||
+        (this.state.submitted && !this.isBodyValid())
     };
   };
 
-  isValid = () => {
-    return this.isTitleValid() && this.isAuthorValid() && this.isBodyValid();
-  };
-
-  isTitleValid = () => this.state.title.length > 0;
-  isAuthorValid = () => this.state.author.length > 0;
-  isBodyValid = () => this.state.body.length > 0;
+  isTitleValid = () => this.state.values.title.length > 0;
+  isAuthorValid = () => this.state.values.author.length > 0;
+  isBodyValid = () => this.state.values.body.length > 0;
 
   render() {
     const errors = this.validate();
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="blog-title">Title</label>
-        <input
-          id="blog-title"
-          type="text"
-          name="title"
-          placeholder="title"
-          className={errors.title ? "error" : ""}
-          value={this.state.title}
-          required
-          onChange={this.handleChange}
-        />
-        {errors.title && <div className="errorMsgDiv">Title is required!</div>}
-        <br />
-        <label htmlFor="author-name">Author</label>
-        <input
-          id="author-name"
-          type="text"
-          name="author"
-          placeholder="author"
-          className={errors.author ? "error" : ""}
-          value={this.state.author}
-          required
-          onChange={this.handleChange}
-        />
-        {errors.author && (
-          <div className="errorMsgDiv">Author name is required!</div>
-        )}
+      <div className="form-wrapper">
+        <h3 className="form-header">Would you like to submit a blog?</h3>
+        <form className="newBlogForm" onSubmit={this.handleSubmit}>
+          <label htmlFor="blog-title">Title</label>
+          <input
+            id="blog-title"
+            type="text"
+            name="title"
+            placeholder="title"
+            className={errors.title ? "error" : ""}
+            value={this.state.values.title}
+            required
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
+          />
+          {errors.title && (
+            <div className="errorMsgDiv">Title is required!</div>
+          )}
+          <br />
+          <label htmlFor="author-name">Author</label>
+          <input
+            id="author-name"
+            type="text"
+            name="author"
+            placeholder="author"
+            className={errors.author ? "error" : ""}
+            value={this.state.values.author}
+            required
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
+          />
+          {errors.author && (
+            <div className="errorMsgDiv">Author name is required!</div>
+          )}
 
-        <label htmlFor="body-input">Content</label>
-        <textarea
-          id="body-input"
-          type="textarea"
-          name="body"
-          placeholder="body"
-          className={errors.body ? "error" : ""}
-          value={this.state.body}
-          required
-          onChange={this.handleChange}
-        />
-        {errors.body && <div className="errorMsgDiv">Content is required!</div>}
-        <br />
-        <label htmlFor="key-words">
-          Key Words Instructions: separate words by comma
-        </label>
-        <input
-          id="key-words"
-          type="text"
-          name="tags"
-          placeholder="ex: moon, stars, purple"
-          value={this.state.tags}
-          onChange={this.handleChange}
-        />
-        <br />
-        <label htmlFor="submit-button" />
-        <button
-          id="submit-button"
-          onClick={this.handleSubmit}
-          type="submit"
-          title="submitButton"
-          className="submit"
-          disabled={!this.isValid()}
-        >
-          Submit
-        </button>
-      </form>
+          <label htmlFor="body-input">Content</label>
+          <textarea
+            id="body-input"
+            type="textarea"
+            name="body"
+            placeholder="body"
+            className={errors.body ? "error" : ""}
+            value={this.state.values.body}
+            required
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
+          />
+          {errors.body && (
+            <div className="errorMsgDiv">Content is required!</div>
+          )}
+          <br />
+          <label htmlFor="key-words">Key Words:</label>
+          <input
+            id="key-words"
+            type="text"
+            name="tags"
+            placeholder="ex: moon, stars, purple"
+            value={this.state.values.tags}
+            onChange={this.handleChange}
+          />
+          <br />
+          <label htmlFor="submit-button" />
+          <button
+            id="submit-button"
+            onClick={this.handleSubmit}
+            type="submit"
+            title="submitButton"
+            className="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     );
   }
 }
