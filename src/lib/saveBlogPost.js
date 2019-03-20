@@ -1,7 +1,7 @@
 function saveBlogPost(blogPost) {
   const allPosts = JSON.parse(localStorage.getItem("posts"));
-
-  return allPosts.push(blogPost);
+  allPosts.push(blogPost);
+  localStorage.setItem("posts", JSON.stringify(allPosts));
 }
 
 export default saveBlogPost;

@@ -77,7 +77,6 @@ export class NewPost extends Component {
       blogPost.createdOn = todaysDate;
 
       saveBlogPost(blogPost);
-      console.log(blogPost);
     }
   };
 
