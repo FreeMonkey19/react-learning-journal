@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import { data } from "./data.js";
 import { AllPosts } from "./AllPosts";
-
-function fetchAllPosts() {
-  return data;
-}
 
 export class AllPostsContainer extends Component {
   state = {
@@ -12,7 +7,7 @@ export class AllPostsContainer extends Component {
   };
 
   componentDidMount() {
-    const allPosts = fetchAllPosts();
+    const allPosts = JSON.parse(localStorage.getItem("posts"));
     this.setState({ posts: allPosts });
   }
 

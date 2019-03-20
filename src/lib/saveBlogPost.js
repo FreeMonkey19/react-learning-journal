@@ -1,7 +1,7 @@
-import { data } from "../data";
-
 function saveBlogPost(blogPost) {
-  return data.push(blogPost);
+  const allPosts = JSON.parse(localStorage.getItem("posts"));
+
+  return allPosts.push(blogPost);
 }
 
 export default saveBlogPost;
