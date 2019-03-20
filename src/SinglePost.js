@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { BlogPost } from "./BlogPost.js";
-import { data } from "./data";
 
 export class SinglePost extends Component {
   state = { post: {} };
 
   componentDidMount() {
+    const allPosts = JSON.parse(localStorage.getItem("posts"));
     const id = parseInt(this.props.match.params.id);
-    const currentPost = data.find(function(post) {
+    const currentPost = allPosts.find(function(post) {
       return id === post.id;
     });
     this.setState({ post: currentPost });

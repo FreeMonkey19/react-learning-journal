@@ -3,3 +3,6 @@
 import "react-testing-library/cleanup-after-each";
 // this adds jest-dom's custom assertions
 import "jest-dom/extend-expect";
+import { data } from "./data";
+
+Storage.prototype.getItem = jest.fn(() => JSON.stringify(data));

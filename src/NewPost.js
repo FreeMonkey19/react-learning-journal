@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { data } from "./data";
 import "./NewPost.css";
 import saveBlogPost from "./lib/saveBlogPost";
 
@@ -31,7 +30,8 @@ export class NewPost extends Component {
   };
 
   createUniqueIdOnSubmit = () => {
-    return data.length;
+    const allPosts = JSON.parse(localStorage.getItem("posts"));
+    return allPosts.length;
   };
 
   convertTagsToArray = tags => {
