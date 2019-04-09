@@ -7,8 +7,12 @@ export class AllPostsContainer extends Component {
   };
 
   componentDidMount() {
-    const allPosts = JSON.parse(localStorage.getItem("posts"));
-    this.setState({ posts: allPosts });
+    fetch("http://localhost:4000/blog_posts")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ posts: data });
+      })
+      .catch(error => console.error(error));
   }
 
   render() {

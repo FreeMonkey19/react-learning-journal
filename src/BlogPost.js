@@ -8,9 +8,12 @@ export class BlogPost extends Component {
     const { post, onFilterByAuthor, onFilterByTag, previewMode } = this.props;
 
     function renderDate(date) {
-      const datePieces = date.split("-");
-      const [year, month, day] = datePieces;
-      return `Publish Date: ${month} - ${day} - ${year}`;
+      const today = new Date(date);
+      const month = today.toLocaleString("en-us", { month: "long" });
+      const day = today.getDay();
+      const year = today.getFullYear();
+
+      return `Publish Date: ${month}- ${day} -${year}`;
     }
     function renderBody() {
       if (previewMode === true) {
@@ -40,7 +43,7 @@ export class BlogPost extends Component {
           </button>
         </div>
 
-        <span className="post-created-on">{renderDate(post.createdOn)}</span>
+        <span className="post-created-on">{renderDate(post.created_on)}</span>
 
         <div className="post-body">{renderBody()}</div>
 
@@ -67,7 +70,7 @@ const blogPostPropType = PropTypes.shape({
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
-  createdOn: PropTypes.string.isRequired,
+  created_on: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired
 });
