@@ -56,7 +56,6 @@ export class NewPost extends Component {
       blogPost.tags = resultArray;
 
       saveBlogPost(blogPost);
-      console.log(blogPost);
     }
   };
 
