@@ -8,7 +8,7 @@ function saveBlogPost(blogPost) {
       blogPost: blogPost
     })
   })
-    .then(Response => Response.text())
+    .then(response => response.text())
 
     .catch(error => console.error(error));
 }
