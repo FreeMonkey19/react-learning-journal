@@ -7,31 +7,16 @@ export class NewPost extends Component {
     values: {
       title: "",
       author: "",
-      createdOn: "",
       body: "",
       tags: ""
     },
     touched: {
       title: false,
       author: false,
-      createdOn: false,
       body: false,
       tags: false
     },
     submitted: false
-  };
-
-  createDateOnSubmit = () => {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    return `${year}-${month}-${day}`;
-  };
-
-  createUniqueIdOnSubmit = () => {
-    const allPosts = JSON.parse(localStorage.getItem("posts"));
-    return allPosts.length;
   };
 
   convertTagsToArray = tags => {
@@ -70,13 +55,8 @@ export class NewPost extends Component {
       const blogPost = Object.assign({}, this.state.values);
       blogPost.tags = resultArray;
 
-      const newId = this.createUniqueIdOnSubmit(this.state.values.id);
-      blogPost.id = newId;
-
-      const todaysDate = this.createDateOnSubmit(this.state.values.createdOn);
-      blogPost.createdOn = todaysDate;
-
       saveBlogPost(blogPost);
+      console.log(blogPost);
     }
   };
 

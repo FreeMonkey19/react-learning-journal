@@ -7,7 +7,7 @@ export class MainNav extends Component {
     return (
       <nav className="main-nav" title="main-nav-bar">
         <span className="nav-link-container" title="main-nav-link">
-          <NavLink className="nav-link" to="/">
+          <NavLink className="nav-link" to="/" exact>
             Home
           </NavLink>
         </span>
