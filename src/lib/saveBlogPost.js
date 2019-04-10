@@ -1,7 +1,15 @@
 function saveBlogPost(blogPost) {
-  const allPosts = JSON.parse(localStorage.getItem("posts"));
-  allPosts.push(blogPost);
-  localStorage.setItem("posts", JSON.stringify(allPosts));
-}
+  fetch(`http://localhost:4000/blog_posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      blogPost: blogPost
+    })
+  })
+    .then(response => response.text())
 
+    .catch(error => console.error(error));
+}
 export default saveBlogPost;

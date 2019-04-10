@@ -7,10 +7,12 @@ export class Home extends Component {
   state = { post: {} };
 
   componentDidMount() {
-    const allPosts = JSON.parse(localStorage.getItem("posts"));
-    const homePagePost = allPosts[0];
-
-    this.setState({ post: homePagePost });
+    fetch(`http://localhost:4000/current_blog_post`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ post: data });
+      })
+      .catch(error => console.error(error));
   }
   render() {
     if (this.state.post.id == null) {
