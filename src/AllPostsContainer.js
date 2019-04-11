@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { AllPosts } from "./AllPosts";
+import apiUrl from "./apiUrl";
 
 export class AllPostsContainer extends Component {
   state = {
@@ -7,7 +8,7 @@ export class AllPostsContainer extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:4000/blog_posts")
+    fetch(`${apiUrl()}/blog_posts`)
       .then(response => response.json())
       .then(data => {
         this.setState({ posts: data });

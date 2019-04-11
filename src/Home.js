@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { BlogPost } from "./BlogPost.js";
 import { Sidebar } from "./Sidebar.js";
 import "./Home.css";
+import apiUrl from "./lib/apiUrl.js";
 
 export class Home extends Component {
   state = { post: {} };
 
   componentDidMount() {
-    fetch(`http://localhost:4000/current_blog_post`)
+    fetch(`${apiUrl()}/current_blog_post`)
       .then(response => response.json())
       .then(data => {
         this.setState({ post: data });
