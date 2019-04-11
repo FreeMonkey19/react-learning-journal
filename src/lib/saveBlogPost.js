@@ -1,5 +1,7 @@
+import apiUrl from "./apiUrl.js";
+
 function saveBlogPost(blogPost) {
-  fetch(`http://localhost:4000/blog_posts`, {
+  fetch(`${apiUrl()}/blog_posts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
