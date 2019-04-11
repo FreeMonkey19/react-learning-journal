@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { AllPosts } from "./AllPosts";
-import apiUrl from "./apiUrl";
+import apiUrl from "./lib/apiUrl.js";
 
 export class AllPostsContainer extends Component {
   state = {
