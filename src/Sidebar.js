@@ -22,7 +22,7 @@ export class Sidebar extends Component {
               <img src={charlottePic} alt="Site's author" />
             </div>{" "}
             <span className="author-description">
-              Charlotte Warfel-Learning Blog Creator
+              Charlotte Adams-Learning Blog Creator
             </span>
           </div>
           <div className="sidebar-nav-container">
